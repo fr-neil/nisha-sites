@@ -1,0 +1,90 @@
+/* Questions and answers (pp. 24–27). The questions are set in the blue plate, the answers in ink: the two-colour
+   convention of a printed Q&A. One device per screen: the display head on p. 24, the clip block on p. 26, the type
+   card on p. 27. Motion: a 1 px rule draws beside each Q. number (300 ms, once); B1 on the blocks; B9 on the clip. */
+
+.pg--qa { padding-top: var(--s5); }
+
+/* ---------- head (p. 24): display type is the page's device ---------- */
+.qa__head { padding-top: 14px; border-top: 2px solid var(--ink); }
+.qa__k { color: var(--ink-2); }
+.qa__t { margin-top: var(--s4); font-size: clamp(44px, 12vw, 96px); max-width: 8.5ch; }
+.qa__amp { font-weight: 400; }
+.qa__thi { font: 500 clamp(26px, 6.4vw, 44px)/1.15 var(--f-deva-d); color: var(--blue); margin-top: 6px; }
+.qa__lead { margin-top: var(--s4); max-width: 26ch; }
+
+/* ---------- one question and its answer ---------- */
+.qa { padding: var(--s5) 0 var(--s5); border-bottom: 1px solid var(--rule-soft); }
+.qa__head + .qa { margin-top: var(--s5); border-top: 1px solid var(--rule); }
+.qa__no { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font: 700 18px/1 var(--f-xcond); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.qa__rule { flex: 1; height: 1px; background: var(--ink); transform-origin: 0 50%; }
+.qa__q { font: 600 20px/1.3 var(--f-serif); font-variation-settings: "opsz" 24; color: var(--blue); text-wrap: balance; }
+.qa__hi { display: block; margin-top: 4px; font-size: 15px; font-weight: 500; color: var(--ink-2); }
+.qa__a { margin-top: var(--s3); max-width: 60ch; }
+.qa__a p { font-size: var(--t-body); line-height: 1.55; }
+.qa__refs { display: flex; flex-wrap: wrap; column-gap: 20px; margin-top: 4px; }
+.qa__refs .xref { font-size: 15px; min-width: 44px; border-bottom: 0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3em; }
+@media (hover: hover) and (pointer: fine) { .qa__refs .xref:hover { text-decoration-thickness: 2px; } }
+.qa__cta { margin-top: var(--s4); }
+.qa__cta .btn [lang="hi"] { display: none; }
+@media (min-width: 390px) { .qa__cta .btn [lang="hi"] { display: inline; } }
+
+/* Q. 01: three dated lines */
+.qa__dates li { display: grid; grid-template-columns: 1fr; padding: 8px 0; border-top: 1px solid var(--rule-soft); }
+.qa__dates li:first-child { border-top: 0; padding-top: 0; }
+.qa__d { font: 600 14px/1.4 var(--f-cond); letter-spacing: .04em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: var(--ink-2); white-space: nowrap; }
+@media (min-width: 600px) {
+  .qa__dates li { grid-template-columns: 10.5em minmax(0, 1fr); column-gap: 12px; align-items: baseline; }
+}
+.qa__dates li > span:last-child { margin-top: 2px; }
+
+/* the rule draws once the question is in view (js/pages/questions.js adds .qa-anim first, so no JS = drawn) */
+@media (prefers-reduced-motion: no-preference) {
+  .qa-anim .qa__rule { transform: scaleX(0); transition: transform 300ms var(--e-settle) 60ms; }
+  .qa-anim .qa.is-in .qa__rule { transform: none; }
+}
+
+/* ---------- pictures: the p. 26 clip under Q. 07's answer; the p. 27 type card under Q. 10's ---------- */
+.qa__fig { margin: var(--s5) 0 var(--s4); }
+.qa__fig .fig { width: 100%; }
+.qa__fig--clip .block { --bp: 12px; --bb: 40%; --bl: 30%; }
+.qa__fig .cap { max-width: 46ch; }
+
+/* p. 27 held at launch: the block carries line 1 of its caption as type */
+.tcard { --bp: 16px; --bb: 22%; --bl: 18%; max-width: 420px; }
+.tcard__in { background: var(--paper-hi); border: 1px solid var(--ink); padding: 18px 18px 22px; }
+.tcard__code { display: block; font: 600 14px/1.3 var(--f-cond); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.tcard__t { margin-top: 10px; font: 600 clamp(20px, 5.4vw, 24px)/1.25 var(--f-serif); font-variation-settings: "opsz" 36, "SOFT" 100; text-wrap: balance; }
+
+/* ---------- her approved post lines (absent while qa.herWords is off) ---------- */
+.qa__words { margin-top: var(--s6); padding-top: 12px; border-top: 2px solid var(--ink); }
+.qa__w { margin-top: 12px; max-width: 60ch; }
+.qa__ws { display: block; font: 600 14px/1.3 var(--f-cond); color: var(--ink-2); }
+
+/* ---------- 768+: hanging Q. numbers in the margin column ---------- */
+@media (min-width: 768px) {
+  .qa { display: grid; grid-template-columns: 76px minmax(0, 1fr); column-gap: 20px; }
+  .qa__no { flex-direction: column; align-items: stretch; gap: 8px; margin: 3px 0 0; font-size: 22px; }
+  .qa__rule { flex: none; }
+  .qa__fig { margin-left: 96px; }
+  .qa__fig--clip { margin-left: 0; }
+}
+
+/* ---------- 1100+: spreads; one 60 ch column per page, the clip at the page's outer edge ---------- */
+@media (min-width: 1100px) {
+  .pg--qa { padding-top: 0; }
+  .pg--qa > .qa, .pg--qa > .qa__head, .pg--qa > .pic, .pg--qa > .turn, .pg--qa > .qa__words { max-width: 640px; }
+  .qa__head + .qa { margin-top: var(--s6); }
+  .qa__q { font-size: 22px; }
+  .qa__fig--clip { max-width: none !important; margin-right: 8%; }
+  .spread > .pg--qa:nth-child(even) .qa__fig--clip { margin: var(--s5) 0 var(--s4) 8%; }
+}
+
+/* ---------- the twelve questions, listed under the head (p. 24): 56 px rows into each answer ---------- */
+.qa__ix { margin-top: var(--s5); border-top: 1px solid var(--rule); }
+.qa__ix a { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); align-items: center; column-gap: 10px; min-height: 56px; padding: 8px 0; border-bottom: 1px solid var(--rule-soft); text-decoration: none; }
+.qa__ixn { font: 700 17px/1 var(--f-xcond); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.qa__ixt { font: 500 17px/1.3 var(--f-serif); font-variation-settings: "opsz" 18; color: var(--blue); }
+@media (hover: hover) and (pointer: fine) { .qa__ix a:hover .qa__ixt { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .16em; } }
+@media (min-width: 768px) { .qa__ix ol { columns: 2; column-gap: var(--s5); } .qa__ix li { break-inside: avoid; } }
+@media (min-width: 1100px) { .qa__ix { max-width: 640px; } .qa__ix ol { columns: 1; } .qa__ix a { min-height: 44px; padding: 6px 0; } }
+.qa { scroll-margin-top: calc(var(--tb-h) + 12px); }

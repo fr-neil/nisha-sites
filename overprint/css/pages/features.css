@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Features 01–03 (pp. 4–15): the 扉 and the picture pages. Loaded after system.css and pages.css.
+   One device per screen, and a different one for each story's 扉: Feature 01 a vermilion circle, Feature 02 a
+   Klein-blue panel holding the clip, Feature 03 the arch mirrored to the left. Only the cover's masthead overprints
+   its shape. Captions sit with their picture, inside their page: under it, or beside it at 1100+ when the picture is
+   a narrow portrait.
+   ========================================================================== */
+
+/* ---------- 扉 · phone first ---------- */
+.fx-op { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s4); align-items: start; }
+.fx-op .op__k { grid-column: 1 / -1; margin-bottom: var(--s3); }
+.fx-op__pp { white-space: nowrap; color: var(--ink-2); }
+.fx-op__t { grid-column: 1; position: relative; isolation: isolate; max-width: 9ch; }
+.fx-op__ink { position: relative; }
+.fx-op__side { display: contents; }
+.fx-op__deck { grid-column: 1; margin-top: var(--s4); text-wrap: pretty; }
+.fx-op__vert { grid-column: 2; grid-row: 2 / span 2; padding-top: .35em; font-size: 22px; }
+
+/* the title prints in ink over a blue plate that arrives out of register and settles (no JS; the ink never fades) */
+.fx-op__ghost { position: absolute; inset: 0; z-index: -1; color: var(--blue); opacity: 0; pointer-events: none; user-select: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .fx-op__ghost { animation: fx-reg 1100ms var(--e-settle) 100ms both; }
+  .fx-op__vert { animation: fade 300ms ease-out 260ms both; }
+}
+@keyframes fx-reg {
+  0% { opacity: 1; transform: translate(7px, -5px); }
+  64% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: none; }
+}
+
+/* the shape scales with the screen height so the title and the picture share the first phone screen */
+.fx-op__fig { margin-top: var(--s6); }
+.fx-op__fig .arch { --aw: var(--fx-aw); margin-inline: auto; }
+.fx-op__fig .cap { margin-top: var(--s5); }
+.fx-op__fig .ctl { justify-content: flex-start; }
+/* Feature 01: the circle, the picture centred in its square */
+.fx-op__fig--circle { --fx-aw: max(220px, min(320px, calc(100vw - 2 * var(--mar) - 8px), calc(100svh - 400px))); }
+.fx-op__fig--circle .arch { --cw: var(--fx-pw); }
+/* Feature 03: the arch, mirrored to the left margin */
+.fx-op__fig--arch { --fx-aw: max(200px, min(300px, calc(100vw - 2 * var(--mar) - 28px), calc((100svh - 330px) / 1.6))); }
+.fx-pg--mirror .fx-op__fig .arch { margin-inline: 0 auto; }
+/* Feature 02: the Klein-blue panel with the clip inside. On phones the panel comes before the deck, and its height
+   leaves room for the 44 px controls row above the folio bar (375 × 667 and 390 × 844 checked) */
+.fx-op__fig--panel { --fx-aw: max(170px, min(300px, calc(100vw - 2 * var(--mar) - 8px), calc((100svh - 400px) * var(--fx-awn) / var(--fx-ahn) + 28px))); margin-top: var(--s4); }
+.fx-op__fig--panel .arch { margin-inline: 0 auto; }
+.fx-op__fig--panel .ctl { margin-top: var(--s3); }
+.fx-pg--panel { display: grid; grid-template-columns: minmax(0, 1fr); }
+.fx-pg--panel .fx-op { display: contents; }
+.fx-pg--panel .op__k { order: 1; margin-bottom: var(--s3); }
+.fx-pg--panel .fx-op__t { order: 2; max-width: none; }
+.fx-pg--panel .fx-op__fig { order: 3; }
+.fx-pg--panel .fx-op__side { display: block; order: 4; }
+.fx-pg--panel .fx-op__vert { writing-mode: horizontal-tb; margin-top: var(--s3); padding-top: 0; font-size: 22px; }
+.fx-pg--panel .pg__break, .fx-pg--panel .pg__rf, .fx-pg--panel .pg__folio { order: 9; }
+.fx-pg--panel .pg__break { order: 0; }
+
+/* ---------- picture pages ---------- */
+.pg--pic .fx-fig { --bp: 18px; width: min(calc(var(--maxw) + var(--bp)), 100%); align-items: stretch; }
+.fx-fig .ctl { justify-content: flex-start; }
+.pg--pic .fig--clip.fx-fig, .pg--pic .fig--loop.fx-fig { --bp: 14px; }
+.fx-fig .block { --bw: 100%; --bp: inherit; width: 100%; }
+.fx-fig .cap { width: 0; min-width: 100%; max-width: none; padding-right: var(--bp); }
+.fx-fig--l .cap, .fx-fig--l .ctl, .fx-fig--l .perfbar, .fx-fig--l .ctl__note { padding-left: var(--bp); }
+.fx-fig--l .cap { padding-right: 0; }
+.fx-fig--l .perfbar { background-clip: content-box; }
+.pg--pic .fx-pic { align-items: flex-start; }
+.fx-pic[data-ph="r"] { align-items: flex-end; }
+.fx-pic[data-ph="full"] { align-items: stretch; }
+.fx-pic[data-ph="full"] .fx-fig { width: 100%; }
+
+/* wide pictures (the 1920 frames) keep a low plate */
+#p7 .block, #p11 .block--l { --bb: 40%; }
+#p11 .block--l { --bl: 40%; }
+
+/* ---------- 768: one page at a time, wider ---------- */
+@media (min-width: 768px) {
+  .fx-op__fig--circle { --fx-aw: max(260px, min(360px, calc(100svh - 420px))); }
+  .fx-op__fig--arch { --fx-aw: max(240px, min(320px, calc((100svh - 340px) / 1.6))); }
+  .fx-op__fig--panel { --fx-aw: max(240px, min(330px, calc((100svh - 420px) * var(--fx-awn) / var(--fx-ahn) + 28px))); }
+  .fx-op__fig { width: max-content; max-width: 100%; margin-inline: auto 12%; }
+  .fx-pg--mirror .fx-op__fig, .fx-pg--panel .fx-op__fig { margin-inline: 8% auto; }
+  .fx-op__fig .cap { max-width: var(--fx-aw); }
+  .fx-pic[data-ph="l"] { padding-left: 8%; }
+  .fx-pic[data-ph="r"] { padding-right: 8%; }
+  .fx-pic[data-ph="full"] { align-items: center; }
+  .fx-pic[data-ph="full"] .fx-fig { width: min(calc(var(--maxw) + var(--bp)), 100%); }
+}
+
+/* ---------- ≥ 1100: spreads ---------- */
+@media (min-width: 1100px) {
+  /* 扉: two columns, the text and the shape; nothing overprints */
+  .pg--op.fx-pg { display: grid; grid-template-columns: minmax(0, 1fr) var(--aw-d); grid-template-rows: auto auto 1fr; column-gap: var(--s6); align-content: start; }
+  .fx-op { display: contents; }
+  .fx-op .op__k { grid-area: 1 / 1 / 2 / 3; margin-bottom: var(--s4); }
+  .fx-op__t { grid-area: 2 / 1 / 3 / 3; max-width: 9ch; font-size: clamp(84px, 7.4vw, 108px); }
+  .fx-op__side { grid-area: 3 / 1 / 4 / 2; display: flex; flex-direction: column; align-items: flex-start; padding-top: var(--s5); }
+  .fx-op__deck { margin-top: 0; max-width: 15em; font-size: 21px; }
+  .fx-op__vert { margin-top: var(--s6); padding-top: 0; font-size: 26px; }
+  .fx-op__fig { grid-area: 3 / 2 / 4 / 3; margin: var(--s5) 0 0; width: auto; }
+  .fx-op__fig .arch { --aw: 100%; margin: 0; }
+  .fx-op__fig .cap { max-width: none; }
+
+  /* Feature 01: the title runs across the page; the circle under its end, deck and हिंदी at left */
+  .fx-pg--circle { --aw-d: min(420px, 62%, calc(100svh - 470px)); }
+  .fx-pg--circle .fx-op__t { max-width: none; }
+
+  /* Feature 02: the panel at the page's top right; kicker at the top of the left column, title and deck at its foot */
+  .pg--op.fx-pg--panel { --aw-d: min(360px, 56%, calc((100svh - 330px) * var(--fx-awn-d, .566) + 28px)); grid-template-rows: auto 1fr auto auto; }
+  .fx-pg--panel .op__k { grid-area: 1 / 1 / 2 / 2; }
+  .fx-pg--panel .fx-op__t { grid-area: 3 / 1 / 4 / 2; align-self: end; max-width: 7ch; }
+  .fx-pg--panel .fx-op__side { grid-area: 4 / 1 / 5 / 2; display: flex; }
+  .fx-pg--panel .fx-op__fig { grid-area: 1 / 2 / 5 / 3; margin-top: 0; }
+  .fx-pg--panel .fx-op__vert { writing-mode: vertical-rl; margin-top: var(--s5); }
+
+  /* Feature 03: the arch at the page's left, the text column to its right */
+  .pg--op.fx-pg--mirror { --aw-d: min(400px, 60%, calc((100svh - 300px) / 1.6)); grid-template-columns: var(--aw-d) minmax(0, 1fr); }
+  .fx-pg--mirror .op__k { grid-area: 1 / 1 / 2 / 3; }
+  .fx-pg--mirror .fx-op__t { grid-area: 2 / 2 / 3 / 3; align-self: start; }
+  .fx-pg--mirror .fx-op__side { grid-area: 3 / 2 / 4 / 3; }
+  .fx-pg--mirror .fx-op__fig { grid-area: 2 / 1 / 4 / 2; margin-top: 0; }
+
+  /* picture pages: the picture at its own width (up to the page); narrow portraits carry the caption beside them */
+  .pg--pic.fx-pg { justify-content: flex-start; }
+  .pg--pic.fx-pg--end { justify-content: flex-end; }
+  .spread > .pg--pic .fx-pic { display: block; padding: 0; }
+  .spread > .pg--pic:nth-child(even) .fx-pic { display: flex; flex-direction: column; align-items: flex-end; }
+  .fx-pic .fx-fig, .fx-pic[data-ph="full"] .fx-fig { width: min(calc(var(--maxw) + var(--bp)), 100%); }
+  .fx-pic .fx-fig--side { display: grid; width: 100%; grid-template-columns: min(calc(var(--maxw) + var(--bp)), calc(100% - 180px)) minmax(160px, 1fr); column-gap: var(--s5); align-content: end; }
+  .fx-fig--side > * { grid-column: 1; }
+  .fx-fig--side > .cap { grid-column: 2; grid-row: 1; align-self: end; width: auto; min-width: 0; max-width: 26ch; margin: 0; padding: 0 0 4px; }
+}
+
+/* ≥ 1100 corrections: the 768 offsets never reach the spread; F02's and F03's titles fit their columns */
+@media (min-width: 1100px) {
+  .pg--op .fx-op__fig { margin: var(--s5) 0 0; width: auto; max-width: none; }
+  .pg--op.fx-pg--panel .fx-op__fig { margin-top: 0; }
+  .pg--op.fx-pg--panel .fx-op__t { font-size: clamp(64px, 5vw, 76px); max-width: none; }
+  .pg--op.fx-pg--mirror .fx-op__t { grid-area: 2 / 1 / 3 / 3; justify-self: end; text-align: right; max-width: none; }
+  .pg--op.fx-pg--mirror .fx-op__fig { grid-area: 3 / 1 / 4 / 2; margin-top: var(--s5); }
+  .pg--op.fx-pg--mirror .fx-op__side { align-items: flex-end; text-align: right; }
+}
+@media (min-width: 1100px) { .fx-pic[data-ph] .fx-fig--side { width: 100%; } }

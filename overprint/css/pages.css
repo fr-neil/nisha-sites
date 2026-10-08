@@ -1,0 +1,87 @@
+/* Story pages: features (扉 + picture pages), columns, Questions and answers, colophon and index, back page, 404 */
+
+/* ---------- 扉 · feature opener: kicker, title with the vertical हिंदी, deck, the arch ---------- */
+.pg--op { padding-top: var(--s5); }
+.op__title .title { max-width: 9ch; }
+.op__title .vert { flex: none; font-size: 22px; padding-top: .3em; }
+.op__fig .arch { --aw: min(300px, calc(100vw - 2 * var(--mar) - 16px)); --pw: 88%; --awn: 300; --ahn: 430; margin-inline: auto 14px; }
+.op__fig .cap { margin-top: var(--s6); }
+
+/* ---------- picture pages: one block, its controls and caption ---------- */
+.pg--pic .pic { align-items: center; }
+.pg--pic .block { --bw: min(var(--maxw, 300px), 100%); }
+.pg--pic .fig { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.pg--pic .cap { align-self: stretch; }
+.fig--clip .block, .fig--loop .block { --bp: 14px; }
+#p26 .block { --bp: 12px; --bb: 40%; }
+
+/* video: the poster picture stands in until play (no JS: native controls on the video) */
+.vid { position: relative; }
+.vid video { width: 100%; height: auto; aspect-ratio: var(--ar); background: var(--paper-lo); }
+/* with JS the poster picture paints from the first frame and the video waits, unseen, above it (so the LCP never
+   lands on a video that the enhancement then hides); if core.js never enhances it, the native player shows after 4 s */
+.js .vid .vid__poster { display: block; }
+.js .vid video { position: absolute; inset: 0; height: 100%; object-fit: cover; opacity: 0; transition: opacity 240ms; }
+.js .vid:not(.is-enhanced) video { animation: vid-fallback 0s linear 4s forwards; }
+@keyframes vid-fallback { to { opacity: 1; } }
+.js .vid.is-enhanced.is-live video { opacity: 1; }
+.vid__poster img { width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: cover; }
+
+/* ---------- column plate ---------- */
+.cplate { padding-top: 14px; border-top: 2px solid var(--ink); }
+.cplate__k { color: var(--ink-2); }
+.cplate__n { margin-top: 10px; }
+.cplate__hi { font: 500 clamp(22px, 5vw, 34px)/1.2 var(--f-deva-d); color: var(--blue); margin-top: 4px; }
+.cplate__inst { margin-top: var(--s5); padding: 10px 0; border-block: 1px solid var(--rule); font: 600 17px/1.35 var(--f-cond); letter-spacing: .01em; }
+.cplate__inst [lang="hi"] { color: var(--ink-2); }
+
+/* ---------- Questions and answers ---------- */
+.qa__head { padding-top: 14px; border-top: 2px solid var(--ink); }
+.qa__hhi { font: 500 clamp(24px, 5.6vw, 40px)/1.2 var(--f-deva-d); color: var(--blue); margin: 4px 0 var(--s4); }
+.qa { padding: var(--s5) 0 var(--s4); border-bottom: 1px solid var(--rule-soft); max-width: 60ch; }
+.qa__q { font: 600 20px/1.3 var(--f-serif); font-variation-settings: "opsz" 24; color: var(--blue); }
+.qa__no { display: block; color: var(--ink); margin-bottom: 4px; }
+.qa__hi { display: block; font-size: 15px; color: var(--ink-2); margin-top: 2px; }
+.qa__fig { margin-block: var(--s5); }
+
+/* ---------- colophon register and index ---------- */
+.reg { margin-top: var(--s5); }
+.reg > div { padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+.reg dt { color: var(--ink-2); }
+.reg dd { margin: 2px 0 0; font: 400 16px/1.5 var(--f-serif); }
+.ix { padding: var(--s4) 0; border-bottom: 1px solid var(--rule-soft); }
+.ix__h { margin-bottom: 6px; }
+.ix__p { font: 400 15px/1.5 var(--f-serif); font-variation-settings: "opsz" 12; }
+@media (min-width: 1100px) { .reg > div { display: grid; grid-template-columns: 1fr 2fr; gap: var(--gut); } }
+
+/* ---------- back page: the reply card ---------- */
+.pg--back { padding-top: var(--s5); }
+.card { position: relative; isolation: isolate; background: var(--paper-hi); border: 1px solid var(--ink); max-width: 760px; margin-inline: auto; }
+.card::before { content: ""; position: absolute; inset: -1px; z-index: -1; background: var(--tex-speckle), var(--ver); transform: translate(4px, 4px); }
+.card__stub { padding: 10px 16px; border-bottom: 2px dotted var(--ink); background: var(--paper-hi); }
+.card__name { font: 600 17px/1.2 var(--f-serif); }
+.card__body { padding: 18px 16px 22px; background: var(--paper-hi); }
+.card__t { font-size: clamp(36px, 9vw, 64px); }
+.card__thi { font: 500 22px/1.3 var(--f-deva-d); color: var(--blue); }
+.steps { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: var(--s5) 0; }
+.steps li[aria-current] { box-shadow: inset 0 -3px 0 var(--ver); }
+.card__inc { margin: 8px 0 var(--s5); list-style: disc; padding-left: 1.2em; }
+.card__inc li { padding: 3px 0; }
+@media (min-width: 1100px) {
+  .card { display: grid; grid-template-columns: 2fr 6fr; }
+  .card__stub { border-bottom: 0; border-right: 2px dotted var(--ink); padding: 22px; }
+  .card__body { padding: 28px 32px 32px; }
+}
+
+/* ---------- 404 ---------- */
+.pg--nf .nf__t { margin-top: 8px; max-width: 12ch; }
+.nf__fig { margin: var(--s6) 0; max-width: 340px; }
+.nf__go { display: flex; gap: 20px; margin-top: var(--s5); }
+
+/* ---------- 1100+: spreads ---------- */
+@media (min-width: 1100px) {
+  .pg--op .op__fig .arch { --aw: 360px; margin-inline: 8% auto; }
+  .pg--pic { display: flex; flex-direction: column; justify-content: center; }
+  .spread > .pg--pic:nth-child(odd) .pic { align-items: flex-start; padding-left: 8%; }
+  .spread > .pg--pic:nth-child(even) .pic { align-items: flex-end; padding-right: 8%; }
+}

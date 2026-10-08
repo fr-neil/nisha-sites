@@ -1,0 +1,146 @@
+/* Columns · On the mic, People and clients, Formats, Places (pp. 16–23).
+   One fixed format: the plate and this issue's instalment on the left page, one block on the right page.
+   One dominant device per screen: the verified words (p. 16), the counter (p. 20), the plate (pp. 18, 22),
+   the block (pp. 17, 19, 21, 23). Loaded after system.css and pages.css. */
+
+/* ---------- the column plate ---------- */
+.cp { padding-top: 12px; border-top: 2px solid var(--ink); }
+.cp__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; color: var(--ink-2); }
+.cp__row [lang="hi"] { margin-left: .35em; }
+.cp__ref { white-space: nowrap; color: var(--ink); }
+.cp__name { margin-top: 12px; }
+.cp__hi { margin-top: 2px; font: 500 clamp(22px, 5.4vw, 34px)/1.15 var(--f-deva-d); color: var(--blue); }
+/* this issue's instalment: the slot that changes every issue */
+.cp__inst { margin-top: var(--s5); padding: 12px 0 14px; border-block: 1px solid var(--rule); }
+.cp__k { display: block; color: var(--ink-2); margin-bottom: 4px; }
+.cp__k [lang="hi"] { margin-left: .35em; }
+.cp__t { font: 500 22px/1.2 var(--f-serif); font-variation-settings: "opsz" 30, "SOFT" 100; }
+.cp__thi { display: block; margin-top: 2px; font-size: 15px; color: var(--ink-2); }
+
+/* ---------- the instalment's lines: newest first, what · where · when ---------- */
+.cbody { margin-top: var(--s5); }
+.cl__h { margin: var(--s5) 0 2px; color: var(--ink-2); }
+.cl { max-width: 40rem; }
+.cl__i { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+.cl__b { min-width: 0; }
+.cl__t { display: block; font: 500 19px/1.3 var(--f-serif); font-variation-settings: "opsz" 24; text-wrap: pretty; }
+.cl__m { display: block; margin-top: 2px; font: 600 15px/1.35 var(--f-cond); letter-spacing: .02em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.cl__x, .mq__x { border-bottom: 0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .24em; }
+@media (hover: hover) and (pointer: fine) { .cl__x:hover, .mq__x:hover { text-decoration-thickness: 2px; } }
+.cl__x { flex: none; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding-inline: 4px; font-size: 16px; transition: transform var(--d-quick) var(--e-settle); }
+@media (hover: hover) and (pointer: fine) { .cl__x:hover { transform: translateX(2px); } }
+
+/* the one cross-reference to the index on p. 29: a 56 px row */
+.cx { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 14px; min-height: 56px; margin-top: var(--s4); padding: 10px 0; border-bottom: 2px solid var(--ink); text-decoration: none; font: 500 16px/1.35 var(--f-serif); font-variation-settings: "opsz" 18; max-width: 40rem; transition: background-color 150ms; }
+.cx [lang="hi"] { margin-left: .35em; color: var(--ink-2); font-size: 14px; }
+.cx__go { flex: none; font: 700 17px/1 var(--f-xcond); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; transition: transform var(--d-quick) var(--e-settle); }
+@media (hover: hover) and (pointer: fine) { .cx:hover { background: var(--paper-lo); } }
+@media (hover: hover) and (pointer: fine) { .cx:hover .cx__go { transform: translateX(3px); } }
+.cnote { margin-top: var(--s4); font: 400 15px/1.45 var(--f-serif); font-variation-settings: "opsz" 14; color: var(--ink-2); }
+.cnote--also .cl__x { display: inline-block; min-width: 44px; min-height: 0; padding: 12px 12px; margin: -12px -12px; font-size: 15px; }
+.cnote [lang="hi"] { margin-left: .35em; }
+
+/* ---------- p. 16 · On the mic: the verified words, the only display quotes in the issue ---------- */
+.mq { margin-top: var(--s6); }
+.mq__q { margin: 0; }
+.mq__big, .mq__small { font-family: var(--f-serif); font-style: italic; font-weight: 500; font-variation-settings: "opsz" 48, "SOFT" 100; text-wrap: balance; hanging-punctuation: first; }
+.mq__big { font-size: clamp(32px, 8.6vw, 72px); line-height: 1.06; letter-spacing: -.012em; }
+.mq__small { margin-top: var(--s4); font-size: clamp(24px, 5.8vw, 40px); line-height: 1.12; }
+.mq__l { display: block; position: relative; isolation: isolate; }
+.mq__l--open { text-indent: -.4em; }
+.mq__at { margin-top: var(--s5); padding-top: 10px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: center; gap: 0 12px; font: 600 15px/1.4 var(--f-cond); letter-spacing: .02em; }
+.mq__x { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* B15 · each cue arrives 3 px out of register, its blue plate a step behind, and settles (90 ms apart, once).
+   The cues open the page, so this runs in CSS from first paint and never waits for JS: the ink lines are painted at
+   full strength in the first frame; only the blue copy behind them fades out. Reduced motion: static. */
+@media (prefers-reduced-motion: no-preference) {
+  .mq__l { animation: mq-ink 640ms var(--e-settle) both; animation-delay: calc(var(--i) * 90ms); }
+  .mq__l::after { content: attr(data-l) / ""; position: absolute; inset: 0; z-index: -1; color: var(--blue); pointer-events: none; animation: mq-plate 1000ms var(--e-settle) both; animation-delay: calc(var(--i) * 90ms + 60ms); }
+}
+@keyframes mq-ink { from { transform: translate(3px, -2px); } to { transform: none; } }
+@keyframes mq-plate { 0% { opacity: .9; transform: translate(-3px, 2px); } 60% { opacity: .9; transform: none; } 100% { opacity: 0; transform: none; } }
+
+/* ---------- p. 17 · every voice in this issue: 56 px rows, in page order, no years ---------- */
+.vl { margin-top: var(--s7); width: 100%; }
+.vl__h { padding-top: 10px; border-top: 2px solid var(--ink); }
+.vl__h [lang="hi"] { margin-left: .35em; }
+.vl__list { margin-top: 6px; }
+.vo { display: grid; grid-template-columns: 4.4em 1fr auto; align-items: center; column-gap: 12px; min-height: 56px; padding: 8px 0; border-bottom: 1px solid var(--rule-soft); text-decoration: none; transition: background-color 150ms; }
+@media (hover: hover) and (pointer: fine) { .vo:hover { background: var(--paper-lo); } }
+.vo__code { font: 700 18px/1.1 var(--f-xcond); letter-spacing: .03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vo__d { display: block; font: 600 13px/1.2 var(--f-cond); color: var(--ink-2); }
+.vo__t { min-width: 0; font: 500 17px/1.25 var(--f-serif); font-variation-settings: "opsz" 18; }
+.vo__s { display: block; font: 600 13px/1.3 var(--f-cond); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); }
+.vo__go { font: 700 20px/1 var(--f-xcond); padding-right: 4px; transition: transform var(--d-quick) var(--e-settle); }
+@media (hover: hover) and (pointer: fine) { .vo:hover .vo__go { transform: translateX(2px); } }
+@media (hover: hover) and (pointer: fine) { .vo:hover .vo__t { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .16em; } }
+.vo[aria-current] { position: relative; }
+.vo[aria-current]::before { content: ""; position: absolute; left: -10px; top: 8px; bottom: 8px; width: 4px; background: var(--ver); }
+@media (hover: hover) and (pointer: fine) { .vo[aria-current]:hover .vo__go { transform: translateY(-2px); } }
+.vl__lang { margin-top: var(--s4); font: 400 15px/1.45 var(--f-serif); font-variation-settings: "opsz" 14; color: var(--ink-2); }
+
+/* ---------- p. 20 · Formats: the one real count, numbering machine (B6) ---------- */
+.fn { display: grid; grid-template-columns: auto 1fr; align-items: end; column-gap: 14px; padding-bottom: var(--s4); border-bottom: 1px solid var(--rule); }
+.fn__v { font-size: clamp(88px, 26vw, 168px); font-weight: 800; line-height: 1; letter-spacing: -.01em; color: var(--blue); margin-bottom: -.12em; }
+.fn__t { font: 400 18px/1.4 var(--f-serif); font-variation-settings: "opsz" 18; max-width: 26ch; padding-bottom: 2px; }
+
+/* ---------- picture pages: the block, its controls and caption, then the turn ---------- */
+.pg--cpic .pic { align-items: center; }
+.pg--cpic .turn { margin-top: var(--s6); }
+
+/* ---------- 768 ---------- */
+@media (min-width: 768px) {
+  .pg--plate { max-width: 44rem; }
+  .cp__t { font-size: 26px; }
+  .cl__t { font-size: 20px; }
+  .fn__t { font-size: 20px; }
+  .pg--cpic .pic, .pg--voices .vl { max-width: 40rem; margin-inline: auto; }
+}
+
+/* ---------- 1100+: the spread. Left: plate and text at columns 1–6. Right: the block from column 8. ---------- */
+@media (min-width: 1100px) {
+  .pg--plate { max-width: none; display: flex; flex-direction: column; }
+  .cp__name { font-size: 64px; }
+  .cp__t { font-size: 30px; }
+  .cp__thi { font-size: 16px; }
+  .cbody { margin-top: var(--s6); }
+  .cl__t { font-size: 21px; }
+  .mq { margin-top: var(--s6); max-width: 620px; }
+  .mq__big { font-size: 64px; }
+  .mq__small { font-size: 36px; margin-top: var(--s5); }
+  .mq__at { font-size: 16px; }
+  .fn__v { font-size: 168px; }
+  .fn__t { font-size: 22px; }
+
+  /* the right page: six columns; the block starts at the page's second column (the spread's 8th) */
+  .pg--cpic { --col: calc((100% - 5 * var(--gut)) / 6); justify-content: flex-start; }
+  .spread > .pg--cpic:nth-child(even) .pic { align-items: flex-start; padding: 0 0 0 calc(var(--col) + var(--gut)); }
+  .pg--cpic .fig { align-items: flex-start; }
+  .pg--cpic .cap { max-width: 36ch; }
+  .pg--cpic .pic, .pg--voices .vl { max-width: none; margin-inline: 0; align-self: stretch; }
+  .pg--cpic .turn, .pg--voices .vl { margin-left: calc(var(--col) + var(--gut)); width: auto; }
+  .pg--voices .vl { margin-top: var(--s6); max-width: none; }
+  /* p. 23 sits a column earlier (spread columns 7–11) */
+  .spread > #p23.pg--cpic .pic { padding-left: 0; }
+  #p23 .turn { margin-left: 0; }
+}
+
+
+/* 1100+: the picture at its own width, the caption beside it (the right page's columns carry the pair) */
+@media (min-width: 1100px) {
+  .spread > .pg--cpic:nth-child(even) .pic, .spread > #p23.pg--cpic .pic { padding-left: 0; }
+  .pg--cpic .turn, .pg--voices .vl, #p23 .turn { margin-left: 0; }
+  .pg--cpic .fig { display: grid; width: 100%; grid-template-columns: min(calc(var(--maxw) + 18px), calc(100% - 200px)) minmax(160px, 1fr); column-gap: var(--s5); align-items: end; }
+  .pg--cpic .fig > * { grid-column: 1; }
+  .pg--cpic .fig > .cap { grid-column: 2; grid-row: 1; align-self: end; margin: 0; max-width: 26ch; padding-bottom: 4px; }
+}
+
+/* 768–1099: one page at a time; the block from the second of eight columns, its caption on the same edge */
+@media (min-width: 768px) and (max-width: 1099.98px) {
+  .pg--cpic { --col8: calc((100% - 7 * var(--gut)) / 8 + var(--gut)); }
+  .pg--cpic .pic { max-width: none; margin-inline: 0; align-items: flex-start; padding-left: var(--col8); }
+  .pg--cpic .fig { align-items: flex-start; }
+  .pg--cpic .cap { max-width: 44ch; }
+  .pg--voices .vl, .pg--cpic .turn { max-width: none; margin-left: var(--col8); width: auto; }
+}

@@ -1,0 +1,187 @@
+/* Back page: the reader's reply card. A paper-hi card with a perforated stub (top on phones, left at 1100+), a
+   vermilion plate 4 px out of register under it, fields set as ruled lines, square ballot boxes filled with the
+   blue plate, a rubber stamp at 02 Check, and a tear along the perforation at 03 Send (B11).
+   The card is the page's only picture. Phones: the 56 px card bar is the only sticky element; the folio bar steps
+   aside for it. No JS: "What to include" and the Instagram link. */
+
+/* the card bar replaces the folio bar on this page */
+body.is-back .fb { display: none; }
+body.is-back { padding-bottom: calc(56px + var(--safe-b) + 24px); }
+@media (min-width: 1100px) { body.is-back { padding-bottom: 0; } }
+html:not(.js) body.is-back { padding-bottom: 0; }
+
+.pg--back { padding-top: var(--s5); }
+.rc__k { color: var(--ink-2); margin-bottom: var(--s3); }
+
+/* ---------- the card ---------- */
+.rc { position: relative; isolation: isolate; max-width: 880px; margin-inline: auto; }
+.rc::before { content: ""; position: absolute; z-index: -1; inset: 0; background: url("../tex-speckle.png"), var(--ver); transform: translate(4px, 4px); pointer-events: none; }
+.rc__stub { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 8px 14px 10px; background: var(--paper-lo); border: 1px solid var(--ink); border-bottom: 0; }
+.rc__stub::after { content: ""; position: absolute; left: 6px; right: 6px; bottom: -1px; height: 2px; background: radial-gradient(circle, var(--ink) 1px, transparent 1.4px) 0 50% / 6px 2px repeat-x; }
+.rc__stubk { font: 600 13px/1.25 var(--f-cond); letter-spacing: .05em; text-transform: uppercase; }
+.rc__stubk [lang="hi"] { font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--ink-2); }
+.rc__to { display: none; }
+.rc__name { font: 600 15px/1.1 var(--f-serif); font-variation-settings: "opsz" 24; white-space: nowrap; }
+.rc__card { position: relative; background: var(--paper-hi); border: 1px solid var(--ink); border-top: 0; padding: 18px 16px 24px; transform-origin: 20% 0; }
+
+.rc__head { padding-bottom: var(--s4); }
+.rc__t { font-size: clamp(38px, 10.4vw, 72px); }
+.rc__thi { font: 500 clamp(22px, 5.6vw, 32px)/1.2 var(--f-deva-d); color: var(--blue); margin-top: 4px; }
+.rc__lead { margin-top: var(--s3); max-width: 38ch; font-size: 17px; line-height: 1.45; }
+.rc__steps { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: var(--s4); padding-top: 10px; border-top: 1px solid var(--rule); }
+.rc__st { padding: 6px 0 5px; font: 600 15px/1.2 var(--f-cond); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); transition: color 160ms; }
+.rc__st > span:first-child { font-family: var(--f-xcond); font-weight: 700; font-size: 17px; margin-right: 2px; }
+.rc__st [lang="hi"] { font-size: 14px; letter-spacing: 0; text-transform: none; }
+.rc__st[aria-current] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--ver); }
+.rc__st.is-done { color: var(--ink); }
+
+/* no JS: what to include + the Instagram link; with JS: the three steps */
+.rc__nojs { padding-top: var(--s3); border-top: 1px solid var(--rule); }
+.rc__inc { margin: 8px 0 var(--s5); padding-left: 1.1em; list-style: square; }
+.rc__inc li { padding: 3px 0; }
+.rc__fine { margin-top: var(--s4); font-size: 15px; color: var(--ink-2); }
+.js .rc__nojs { display: none; }
+html:not(.js) .rq, html:not(.js) .rc__bar { display: none; }
+
+/* ---------- 01 Enter: fields as ruled lines ---------- */
+.rq__gh { font: 600 13px/1.3 var(--f-cond); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); padding: var(--s4) 0 2px; }
+.rq__gh [lang="hi"] { font-size: 14px; letter-spacing: 0; text-transform: none; margin-left: .35em; }
+.rq__grp + .rq__grp { margin-top: var(--s4); }
+.rf { margin: 0; padding: 14px 0 6px; border: 0; min-width: 0; }
+.rf__l { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; padding: 0; width: 100%; }
+.rf__no { font: 700 17px/1 var(--f-xcond); color: var(--blue); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.rf__t { font: 600 17px/1.3 var(--f-serif); font-variation-settings: "opsz" 24; }
+.rf__t [lang="hi"] { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: .3em; }
+.rf__opt { margin-left: auto; font: 600 13px/1.2 var(--f-cond); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); }
+.rf__hint { margin-top: 2px; font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+.rf__row { position: relative; display: flex; align-items: flex-end; gap: 8px; margin-top: 4px; }
+.rf__in { display: block; width: 100%; min-width: 0; min-height: 48px; padding: 12px 2px 6px; border: 0; border-bottom: 1.5px solid var(--ink); border-radius: 0; background: transparent; font: 400 16px/1.35 var(--f-serif); color: var(--ink); -webkit-appearance: none; appearance: none; transition: border-color 160ms, background-color 160ms; }
+@media (hover: hover) and (pointer: fine) { .rf__in:hover { background: rgba(31, 59, 166, .035); } }
+.rf__in:focus { outline: none; border-bottom-color: var(--blue); box-shadow: 0 1.5px 0 var(--blue); background: rgba(31, 59, 166, .045); }
+.rf__in:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 0; }
+.rf__in[aria-invalid="true"] { border-bottom-color: var(--ver); box-shadow: 0 1.5px 0 var(--ver); }
+.rf__sel .rf__in { padding-right: 28px; cursor: pointer; }
+.rf__caret { position: absolute; right: 6px; bottom: 18px; width: 12px; height: 12px; fill: none; stroke: var(--ink); stroke-width: 1.6; pointer-events: none; }
+.rf__pick { flex: none; min-height: 44px; padding: 8px 10px; background: var(--paper); border: 1.5px solid var(--ink); font: 700 14px/1.1 var(--f-cond); white-space: nowrap; }
+.rf__pick [lang="hi"] { display: none; }
+.rf__native { position: absolute; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.rf__ta { min-height: 104px; resize: vertical; padding: 4px 2px; line-height: 32px; background: repeating-linear-gradient(to bottom, transparent 0 31px, var(--rule-soft) 31px 32px); background-attachment: local; border-bottom-width: 1.5px; }
+.rf__count { margin-top: 4px; text-align: right; font: 600 13px/1.3 var(--f-cond); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.rf__err { display: flex; gap: 8px; align-items: baseline; margin-top: 6px; font: 600 15px/1.35 var(--f-cond); color: var(--ink); }
+.rf__err::before { content: ""; flex: none; width: 9px; height: 9px; background: var(--ver); transform: translateY(-1px); }
+.rf__ro { margin-top: 6px; padding: 8px 0; border-bottom: 1px dotted var(--ink); font: 600 16px/1.3 var(--f-cond); font-variant-numeric: tabular-nums; }
+
+/* radios and the flexible-dates box: full-width 56 px rows with a square ballot box */
+.rf__opts { margin-top: 6px; border-top: 1px solid var(--rule-soft); }
+.ro, .rck { position: relative; display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 4px; border-bottom: 1px solid var(--rule-soft); cursor: pointer; transition: background-color 150ms; }
+.rck { min-height: 52px; border-bottom: 0; margin-top: 4px; }
+@media (hover: hover) and (pointer: fine) { .ro:hover, .rck:hover { background: var(--paper-lo); } }
+.ro input, .rck input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.ro__b { position: relative; flex: none; width: 20px; height: 20px; border: 1.5px solid var(--ink); background: var(--paper-hi); }
+/* single-choice groups read as radios: a round box with a filled dot (the flexible-dates checkbox stays square) */
+.ro .ro__b, .ro .ro__b::after { border-radius: 50%; }
+.ro .ro__b::after { inset: 4px; }
+.ro__b::after { content: ""; position: absolute; inset: 3px; background: url("../tex-speckle.png"), var(--blue); transform: scale(0); transition: transform 140ms var(--e-settle); }
+.ro input:checked + .ro__b::after, .rck input:checked + .ro__b::after { transform: none; }
+.ro input:checked + .ro__b, .rck input:checked + .ro__b { box-shadow: 2px 2px 0 var(--ver); }
+.ro input:focus-visible + .ro__b, .rck input:focus-visible + .ro__b { outline: 2px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 6px var(--paper-hi), 0 0 0 8px var(--blue); }
+.ro__t { font-size: 16px; line-height: 1.3; }
+.ro__t [lang="hi"], .rck [lang="hi"] { font-size: 14px; color: var(--ink-2); margin-left: .3em; }
+.rf--set[data-invalid] .rf__opts { box-shadow: inset 3px 0 0 var(--ver); }
+
+/* error summary at the top of the card */
+.rq__errs { margin-top: var(--s4); padding: 12px 14px; border: 2px solid var(--ink); background: var(--paper); }
+.rq__errs-h { font: 700 16px/1.3 var(--f-cond); letter-spacing: .02em; }
+.rq__errs ul { margin-top: 4px; }
+.rq__errs a { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; }
+@media (prefers-reduced-motion: no-preference) { .rq__errs.is-new { animation: errs-in 240ms var(--e-settle); } }
+@keyframes errs-in { from { transform: translateX(-6px); } }
+
+/* ---------- 02 Check: read back, then the stamp lands (B11) ---------- */
+.rq__pane { position: relative; }
+.rq__h { font: 700 24px/1.1 var(--f-xcond); letter-spacing: .04em; text-transform: uppercase; padding-top: var(--s3); }
+.rq__h [lang="hi"] { font-family: var(--f-deva); text-transform: none; letter-spacing: 0; font-size: 17px; color: var(--ink-2); }
+.rq__h:focus, .rq__h:focus-visible { outline: none; box-shadow: none; }
+#check { position: static; }
+.rq__lead { margin-top: 6px; max-width: 40ch; color: var(--ink-2); font-size: 16px; }
+.rq__list { margin-top: var(--s4); border-top: 1.5px solid var(--ink); }
+.rq__list > div { padding: 9px 0 10px; border-bottom: 1px solid var(--rule-soft); }
+.rq__list dt { font: 600 13px/1.3 var(--f-cond); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+.rq__list dt [lang="hi"] { font-size: 14px; letter-spacing: 0; text-transform: none; margin-left: .4em; }
+.rq__list dd { margin: 2px 0 0; font-size: 17px; line-height: 1.4; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: no-preference) {
+  .rq__list.is-revealing > div { animation: row-read 260ms var(--e-settle) both; animation-delay: calc(min(var(--i, 0), 11) * 35ms); }
+}
+@keyframes row-read { from { opacity: 0; transform: translateY(4px); } }
+.stamp { position: absolute; z-index: 3; top: 14px; right: 10px; display: flex; flex-direction: column; align-items: center; padding: 6px 12px 4px; border: 2px solid var(--blue); outline: 1px solid var(--blue); outline-offset: -6px; color: var(--blue); mix-blend-mode: multiply; transform: rotate(-3deg); pointer-events: none; opacity: .92; }
+.stamp span:first-child { font: 800 22px/1 var(--f-xcond); letter-spacing: .12em; text-transform: uppercase; }
+.stamp [lang="hi"] { font: 500 17px/1.2 var(--f-deva-d); color: var(--blue); }
+.stamp { visibility: hidden; }
+.stamp.is-on { visibility: visible; }
+@media (prefers-reduced-motion: no-preference) { .stamp.is-on { animation: stamp-in 180ms cubic-bezier(.3, .0, .2, 1) 160ms both; } }
+@keyframes stamp-in { from { transform: rotate(-3deg) scale(1.15); opacity: 0; } 60% { opacity: .92; } to { transform: rotate(-3deg) scale(1); } }
+
+/* ---------- 03 Send: the card tears off along its perforation (B11) ---------- */
+.rq__msg { margin-top: var(--s4); padding: 14px 14px 16px; background: var(--paper); border: 1px solid var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; font: 400 16px/1.55 var(--f-serif); font-variation-settings: "opsz" 14; }
+.rq__msg::selection, .rq__msg *::selection { background: rgba(31, 59, 166, .22); }
+.rq__instr { margin-top: var(--s3); font-size: 16px; }
+.rq__status { font: 600 15px/1.35 var(--f-cond); }
+.rq__status:empty { display: none; }
+.rq__status:not(:empty) { margin-top: 8px; }
+.rq__again { margin-top: var(--s3); }
+.rc.is-torn .rc__card { transform: translateY(10px); -webkit-mask: radial-gradient(circle at 3px 0, transparent 2.2px, #000 2.6px) 0 0 / 6px 100% repeat-x; mask: radial-gradient(circle at 3px 0, transparent 2.2px, #000 2.6px) 0 0 / 6px 100% repeat-x; }
+.rc.is-torn .rc__stub::after { opacity: 0; }
+.rc.is-torn .rc__stub { -webkit-mask: radial-gradient(circle at 3px 100%, transparent 2.2px, #000 2.6px) 0 0 / 6px 100% repeat-x; mask: radial-gradient(circle at 3px 100%, transparent 2.2px, #000 2.6px) 0 0 / 6px 100% repeat-x; border-bottom: 0; }
+@media (prefers-reduced-motion: no-preference) { .rc__card { transition: transform 260ms var(--e-settle); } }
+
+/* ---------- the card bar: phones' thumb zone, rises above the keyboard ---------- */
+.rc__bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 42; display: flex; gap: 8px; align-items: center; height: calc(56px + var(--safe-b)); padding: 0 var(--mar) var(--safe-b); background: var(--paper) url("../tex-grain.png"); border-top: 2px solid var(--ink); transform: translateY(var(--kb, 0px)); }
+.rc__bar > * { min-height: 44px; }
+.rc__bar .btn { flex: 1 1 auto; min-width: 0; padding-inline: 10px; }
+.rc__bar .ghost { flex: 0 0 auto; min-width: 48px; justify-content: center; padding-inline: 8px; }
+.rc__bar [lang="hi"] { display: none; }
+.rc__bar [data-act="edit"] [lang="hi"] { display: inline; }
+.rc__bar .is-copied { text-decoration-thickness: 2px; }
+body.kb-open .tb { transform: translateY(-100%); }
+@media (min-width: 768px) { .rc__bar [lang="hi"] { display: inline; } }
+
+/* ---------- 768+ ---------- */
+@media (min-width: 768px) {
+  .rc__card { padding: 26px 28px 30px; }
+  .rf__opts--3, .rf__opts--4 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 12px; }
+  .rf__opts--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .rq__list { columns: 2; column-gap: var(--s6); }
+  .rq__list > div { break-inside: avoid; }
+  .rf__pick [lang="hi"] { display: inline; }
+}
+
+/* ---------- 1100+: a postcard at columns 3–10, the stub at columns 3–4 ---------- */
+@media (min-width: 1100px) {
+  .pg--back { padding-top: var(--s6); }
+  .rc__k { max-width: 880px; margin: 0 auto var(--s3); }
+  .rc { display: grid; grid-template-columns: 220px minmax(0, 1fr); }
+  .rf__t [lang="hi"], .rf__l [lang="hi"], .rc__stubk [lang="hi"], .rck [lang="hi"] { white-space: nowrap; }
+  .rc__stub { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 10px; padding: 26px 20px; border: 1px solid var(--ink); border-right: 0; }
+  .rc__stub::after { left: auto; right: -1px; top: 6px; bottom: 6px; width: 2px; height: auto; background: radial-gradient(circle, var(--ink) 1px, transparent 1.4px) 50% 0 / 2px 6px repeat-y; }
+  .rc__name { font-size: 22px; white-space: normal; }
+  .rc__to { display: block; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--rule); font: 600 15px/1.35 var(--f-cond); }
+  .rc__tok { display: block; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+  .stamp { top: 24px; right: 24px; }
+  .rc__card { border-top: 1px solid var(--ink); border-left: 0; padding: 30px 34px 34px; transform-origin: 0 30%; }
+  .rq__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 36px; }
+  .rq__grp + .rq__grp { margin-top: 0; }
+  .rf__opts--3, .rf__opts--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rf__opts--1 { display: block; }
+  .ro { min-height: 48px; }
+  .rc__bar { position: static; max-width: 880px; margin-inline: auto; height: auto; padding: 22px 0 0 220px; background: none; border: 0; justify-content: flex-end; gap: 16px; transform: none; }
+  .rc__bar .btn { flex: 0 0 auto; padding-inline: 16px; }
+  #send .rq__msg { max-width: 46ch; }
+  .rc.is-torn .rc__card { transform: translate(10px, 4px) rotate(-.5deg); -webkit-mask: radial-gradient(circle at 0 3px, transparent 2.2px, #000 2.6px) 0 0 / 100% 6px repeat-y; mask: radial-gradient(circle at 0 3px, transparent 2.2px, #000 2.6px) 0 0 / 100% 6px repeat-y; }
+  .rc.is-torn .rc__stub { -webkit-mask: radial-gradient(circle at 100% 3px, transparent 2.2px, #000 2.6px) 0 0 / 100% 6px repeat-y; mask: radial-gradient(circle at 100% 3px, transparent 2.2px, #000 2.6px) 0 0 / 100% 6px repeat-y; }
+  .pg--back > .turn { max-width: 880px; margin-inline: auto; }
+}
+
+#check .rq__lead, #send .rq__lead { margin-top: var(--s4); }
+@media (min-width: 1100px) { #check .rq__lead { max-width: calc(100% - 190px); } }
+html:not(.js) .rc__steps { display: none; }
+.rf--set { padding-top: 20px; }

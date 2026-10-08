@@ -1,0 +1,63 @@
+/* Colophon and index (pp. 28–29). p. 28 is a register set like a Japanese colophon block: label in Sofia Sans
+   Condensed, value in Fraunces, hairlines between rows, a 2 px ink frame top and bottom. p. 29 is a back-of-book
+   index: run-in entries in Fraunces 15 px, headings in Sofia Sans Condensed 13 px caps, two columns at 1100+.
+   Counts roll once in view (B6, core.js); the final values are in the HTML. */
+
+.pg--col { padding-top: var(--s5); }
+
+/* ---------- p. 28 · the register ---------- */
+.reg { margin-top: var(--s5); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.reg__r { padding: 12px 0 14px; border-top: 1px solid var(--rule-soft); }
+.reg__r:first-child { border-top: 0; }
+.reg__l { font: 600 13px/1.35 var(--f-cond); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+.reg__l [lang="hi"] { font-size: 14px; letter-spacing: 0; text-transform: none; margin-left: .35em; }
+.reg__v { margin: 4px 0 0; font: 400 16px/1.55 var(--f-serif); font-variation-settings: "opsz" 14; max-width: 62ch; }
+.reg__p { display: block; }
+.reg__p + .reg__p { margin-top: 8px; }
+.num { font: 700 1.18em/1 var(--f-xcond); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.num .roll { height: 1em; }
+.reg__pics { columns: 1; }
+.reg__pics li { padding: 1px 0; break-inside: avoid; }
+@media (min-width: 560px) { .reg__pics { columns: 2; column-gap: var(--s5); } }
+
+/* inline cross-references: a 44 px tall hit area without changing the line */
+.xref--in { display: inline; padding: 13px 14px; margin-inline: -14px; font-size: 15px; border-bottom: 0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; }
+@media (hover: hover) and (pointer: fine) { .xref--in:hover { text-decoration-thickness: 2px; border-bottom: 0; } }
+
+/* ---------- p. 29 · the index ---------- */
+.ix__plate { margin-bottom: var(--s4); }
+.ix { padding: var(--s4) 0 var(--s4); border-top: 1px solid var(--rule); }
+.ix__h { margin-bottom: 8px; font: 600 13px/1.35 var(--f-cond); letter-spacing: .06em; text-transform: uppercase; }
+.ix__h [lang="hi"] { font-size: 14px; letter-spacing: 0; text-transform: none; margin-left: .35em; color: var(--ink-2); }
+.ix__p, .ix__e, .ix__y { font: 400 15px/1.5 var(--f-serif); font-variation-settings: "opsz" 12; }
+.ix__e { padding-left: 1em; text-indent: -1em; }
+.ix__e + .ix__e { margin-top: 5px; }
+.ix__e b { font-weight: 600; }
+.ix__note { margin-top: 6px; color: var(--ink-2); }
+.ix__y { display: grid; grid-template-columns: 3em minmax(0, 1fr); align-items: baseline; }
+.ix__y + .ix__y { margin-top: 6px; }
+.ix__yr { font: 700 17px/1 var(--f-xcond); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.ix__sea { display: block; color: var(--ink-2); }
+.ix__sea [lang="hi"] { font-size: 14px; }
+
+/* ---------- 1100+: the register on the left page, the index across the right page in two columns ---------- */
+@media (min-width: 1100px) {
+  .pg--col { padding-top: 0; }
+  .reg__r { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); column-gap: var(--gut); }
+  .reg__v { margin-top: 0; }
+  .reg__l [lang="hi"] { display: block; margin: 2px 0 0; }
+  .ix__cols { columns: 2; column-gap: var(--s6); column-rule: 1px solid var(--rule-soft); }
+  .ix { break-inside: avoid-column; }
+  #index-clients { break-inside: auto; }
+  .ix__e, .ix__y { break-inside: avoid; }
+}
+
+/* the index groups fold on phones: a 56 px summary with a plus that turns; core.js opens them all at 1100+ */
+.ix__s { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; cursor: pointer; list-style: none; }
+.ix__s::-webkit-details-marker { display: none; }
+.ix__s::after { content: "+"; flex: none; font: 700 22px/1 var(--f-xcond); transition: transform var(--d-quick) var(--e-settle); }
+.ix__d[open] > .ix__s::after { transform: rotate(45deg); }
+.ix__s .ix__h { margin: 0; }
+.ix__d[open] > .ix__s { margin-bottom: 4px; }
+.ix { padding-block: 0 var(--s3); }
+@media (min-width: 1100px) { .ix__s { min-height: 0; padding-top: var(--s4); cursor: default; pointer-events: none; } .ix__s::after { display: none; } }
