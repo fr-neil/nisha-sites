@@ -1,0 +1,48 @@
+/* ==========================================================================
+   FIELD NOTE · Colophon (奥付 + 凡例): the imprint register, the counts with their bases,
+   the sources, the reading rules and the codes. 1440: section head at columns 1–4, register at 5–12.
+   ========================================================================== */
+.cs .dh { margin-bottom: var(--s5); }
+.cs__grid { display: grid; gap: var(--s5); }
+.cs__head .head-b { margin-top: 0; }
+.cs__head .head-b [lang="hi"] { display: block; margin-top: .35em; }
+.cs__lead { margin-top: var(--s3); max-width: 36ch; color: var(--ink-2); }
+.cs__body { min-width: 0; }
+@media (min-width: 1100px) {
+  .cs__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); }
+  .cs__head { grid-column: 1 / 5; position: sticky; top: calc(var(--bar-h) + var(--s5)); align-self: start; }
+  .cs__body { grid-column: 5 / 13; }
+}
+
+/* label → value register */
+.reg2 { margin: 0; display: grid; border-top: 1px solid var(--line); }
+.reg2 .rg { display: grid; gap: 4px; padding: 14px 0 16px; border-bottom: 1px solid var(--line-soft); }
+.reg2 dt { font: 500 11px/1.4 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; }
+.reg2 dd { margin: 0; max-width: 64ch; line-height: 1.55; }
+.reg2 dd a { white-space: nowrap; }
+@media (min-width: 700px) { .reg2 .rg { grid-template-columns: 180px minmax(0, 1fr); column-gap: var(--gut); align-items: baseline; } }
+/* markers shown as they appear on the site */
+.mk { font: 500 13px var(--f-mono); white-space: nowrap; padding: 0 2px; box-shadow: inset 0 -1px 0 var(--ink-3); }
+.reg2 .again { vertical-align: 1px; }
+
+/* counts with their bases: number · what · basis */
+.cbs, .srcs { display: grid; border-top: 1px solid var(--line); }
+.cb, .src { display: grid; grid-template-columns: 76px minmax(0, 1fr); grid-template-areas: "n l" "n b"; column-gap: var(--s3); row-gap: 2px; padding: 12px 0 14px; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+.cb__n, .src__n { grid-area: n; font-weight: 700; font-size: 34px; line-height: .95; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.cb__l, .src__l { grid-area: l; font-weight: 650; font-size: 16.5px; line-height: 1.3; letter-spacing: -.005em; }
+.cb__l [lang="hi"], .src__l [lang="hi"] { font-weight: 500; font-size: 13.5px; color: var(--ink-2); margin-left: .35em; letter-spacing: 0; }
+.cb__b, .src__b { grid-area: b; font-size: 14.5px; line-height: 1.45; color: var(--ink-2); max-width: 58ch; }
+.cb:first-child .cb__n { font-size: 44px; }
+@media (min-width: 1100px) {
+  .cb, .src { grid-template-columns: 96px minmax(0, 3fr) minmax(0, 5fr); grid-template-areas: "n l b"; column-gap: var(--gut); padding: 14px 0; }
+  .cb__n, .src__n { font-size: 40px; }
+  .cb:first-child .cb__n { font-size: 56px; }
+}
+
+/* codes */
+.cds { display: grid; border-top: 1px solid var(--line); }
+.cd { display: grid; gap: 4px; padding: 12px 0 13px; border-bottom: 1px solid var(--line-soft); }
+.cd__c { font-size: 13.5px; }
+.cd__d { color: var(--ink-2); font-size: 15px; line-height: 1.45; }
+@media (min-width: 700px) { .cd { grid-template-columns: 260px minmax(0, 1fr); column-gap: var(--gut); align-items: baseline; } }
+.cs__more { margin-top: var(--s3); }

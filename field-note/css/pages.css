@@ -1,0 +1,95 @@
+/* ==========================================================================
+   FIELD NOTE · inner pages: volume heads and month groups, the prologue, the atlas list,
+   method units, the request page, the colophon register, 404.
+   ========================================================================== */
+.no-dock { --dock-h: 0px; --rail-w: 0px; }
+
+/* ---------- Volume head: numeral-led ---------- */
+.vh__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--gut); grid-template-areas: "num num" "one one" "cnt fig"; }
+.vh__num { grid-area: num; }
+.vh__one { grid-area: one; margin-top: var(--s5); }
+.vh__cnt { grid-area: cnt; grid-template-columns: 1fr; align-self: start; }
+.vh__fig { grid-area: fig; margin-top: var(--s6); }
+.vh__grid:not(:has(.vh__fig)) { grid-template-areas: "num num" "one one" "cnt cnt"; }
+.vh__grid:not(:has(.vh__fig)) .vh__cnt { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 700px) {
+  .vh__grid { grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-areas: "num num num num num fig fig fig" "one one one one one fig fig fig" "cnt cnt cnt cnt cnt fig fig fig"; }
+  .vh__grid:not(:has(.vh__fig)) { grid-template-areas: "num num num num num num num num" "one one one one one . . ." "cnt cnt cnt cnt cnt cnt cnt cnt"; }
+  .vh__cnt, .vh__grid:not(:has(.vh__fig)) .vh__cnt { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .vh__fig { margin-top: 0; }
+}
+@media (min-width: 1100px) {
+  .vh__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-areas: "num num num num num one one one one fig fig fig" "num num num num num cnt cnt cnt cnt fig fig fig"; }
+  .vh__grid:not(:has(.vh__fig)) { grid-template-areas: "num num num num num one one one one one one one" "num num num num num cnt cnt cnt cnt cnt cnt cnt"; }
+  .vh__one { align-self: end; margin: 0; }
+  .vh__cnt, .vh__grid:not(:has(.vh__fig)) .vh__cnt { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--s5); }
+}
+
+/* the year on its months: sticky 28 px month headers */
+.mgrps { margin-top: var(--s5); }
+.mgrp__h { position: sticky; top: var(--bar-h); z-index: 5; display: flex; align-items: baseline; gap: .6em; height: 28px; padding-top: 6px; background: var(--paper); border-bottom: 1px solid var(--line); font: 500 12px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; }
+.mgrp__h [lang="hi"] { text-transform: none; letter-spacing: 0; font-size: 12.5px; color: var(--ink-2); }
+.mgrp .lines { border-top: 0; margin-bottom: var(--s5); }
+.mgrp { scroll-margin-top: calc(var(--bar-h) + 8px); }
+.ln { scroll-margin-top: calc(var(--bar-h) + 40px); }
+.ln--static .ln__nm { font-weight: 650; }
+.vreq { border-top: 1px solid var(--line); padding-top: var(--s3); }
+.ncs { display: grid; gap: var(--s7) var(--gut); }
+@media (min-width: 700px) { .ncs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .ncs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------- Prologue: lettered lines, set one step lighter ---------- */
+.prolines { border-top: 1px dashed var(--ink-2); }
+.pl { display: grid; grid-template-columns: 28px 76px minmax(0, 1fr); column-gap: var(--s3); padding: 14px 0; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+.pl__k { font-size: 14px; }
+.pl__w { color: var(--ink-2); font-weight: 400; }
+.pl__t { font-size: 16px; line-height: 1.45; }
+.pl__f { grid-column: 3; margin-top: var(--s4); max-width: 420px; }
+
+/* ---------- Atlas ---------- */
+.atlas__s1 svg { max-width: 640px; }
+.place { padding: var(--s5) 0 var(--s4); border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--bar-h) + 12px); }
+.place__h { font-weight: 700; font-size: 22px; letter-spacing: -.015em; line-height: 1.15; }
+.place__h .code { font-size: 13px; margin-right: .4em; }
+.place__h .ink2 { font-weight: 500; font-size: 15px; }
+.place__h [lang="hi"] { font-size: 14px; font-weight: 500; color: var(--ink-2); }
+.place__m { margin: 6px 0 var(--s3); color: var(--ink-2); }
+.place:target .place__h { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--signal); text-underline-offset: .2em; }
+
+/* ---------- Method ---------- */
+.basis { color: var(--ink-2); max-width: 68ch; }
+.reg { width: 100%; max-width: 760px; border-collapse: collapse; }
+.reg th, .reg td { text-align: left; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line-soft); vertical-align: baseline; }
+.reg thead th { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid var(--line); }
+.reg tbody th { font-weight: 600; }
+.reg tbody th [lang="hi"] { display: block; font-weight: 500; font-size: 13px; color: var(--ink-2); }
+.steps { display: grid; border-top: 1px solid var(--line); }
+.steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: var(--s3); row-gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); font-weight: 650; }
+.steps li > span:last-child:not(.bi) { grid-column: 2; font-weight: 400; color: var(--ink-2); }
+@media (min-width: 1100px) { .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gut); border-top: 0; } .steps li { border-top: 2px solid var(--ink); border-bottom: 0; } }
+.faq details { border-bottom: 1px solid var(--line-soft); }
+.faq details:first-child { border-top: 1px solid var(--line); }
+.faq summary { min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: var(--s3); cursor: pointer; font-weight: 650; font-size: 17px; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--f-mono); font-weight: 400; font-size: 18px; transition: transform var(--d-s) var(--ease); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding: 0 0 var(--s4); max-width: 64ch; }
+
+/* ---------- Request ---------- */
+.rq__steps li[aria-current] { box-shadow: inset 4px 0 0 var(--ink); padding-left: var(--s3); }
+.incl { display: grid; gap: 0; border-top: 1px solid var(--line); max-width: 680px; }
+.incl li { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+@media (min-width: 1100px) { .rq { max-width: 860px; } }
+
+/* ---------- Colophon register (奥付) ---------- */
+.colo { display: grid; border-top: 1px solid var(--line); margin: 0; }
+.colo > div { display: grid; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+.colo dt { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .08em; }
+.colo dd { margin: 0; max-width: 68ch; }
+@media (min-width: 1100px) { .colo > div { grid-template-columns: 3fr 9fr; column-gap: var(--gut); } }
+
+/* ---------- Field note head, 404 ---------- */
+.nh__t { margin-top: var(--s4); max-width: 18ch; font-size: clamp(40px, 4.6vw + 20px, 92px); }
+.nh__fig, .nf__fig { margin-top: var(--s6); max-width: 420px; }
+.brief { max-width: 52ch; }
+.nf__links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s6); margin-top: var(--s6); }

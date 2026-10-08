@@ -1,0 +1,29 @@
+/* 404 · Page not found (PHASE-50 §3.11). Phone: the message and search first, then Pl. 01. 768+: text beside the plate. */
+.nf-grid{display:grid;gap:var(--s7);padding-block:var(--s6) var(--s4)}
+.nf-h{font-size:clamp(3rem,13vw,7rem);line-height:.92;overflow-wrap:anywhere}
+.nf-p{margin-top:var(--s5);font-family:var(--f-display);font-style:italic;font-size:var(--t-h2);line-height:1.2}
+.nf-s{margin-top:var(--s6)}
+.nf-s__l{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-bottom:10px;font-size:.9375rem;font-weight:500}
+.nf-s__l [lang="hi"]{font-weight:400;font-size:.8125rem;color:var(--ink-2)}
+.nf-s__row{display:flex}
+.nf-s__in{flex:1;min-width:0;min-height:48px;padding:11px 14px;border:1px solid var(--ink);border-right:0;border-radius:0;background:var(--paper-3);font-size:1rem;-webkit-appearance:none;appearance:none}
+.nf-s__in:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.nf-s__b{flex:none;flex-direction:column;gap:0;min-height:48px;padding:0 16px;line-height:1.15}
+.nf-s__b [lang="hi"]{font-size:.75rem;color:var(--on-ink-2)}
+.nf-links{display:grid;margin-top:var(--s6);border-top:1px solid var(--ink)}
+.nf-links li{border-bottom:1px solid var(--rule)}
+.nf-links .arrow{display:flex;gap:10px;min-height:56px;font-size:1.0625rem}
+.nf-links .arrow [lang="hi"]{font-weight:400;font-size:.8125rem;color:var(--ink-2)}
+.nf-links .arrow>span:last-child{margin-left:auto}
+.nf-links .code{margin-right:6px}
+.nf-plate .plate__cap{max-width:60ch}
+@media (min-width:768px){
+  .nf-grid{grid-template-columns:repeat(8,minmax(0,1fr));column-gap:var(--gutter);align-items:end;padding-top:var(--s8)}
+  .nf-t{grid-column:1/span 4}
+  .nf-plate{grid-column:5/-1}
+}
+@media (min-width:1200px){
+  .nf-grid{grid-template-columns:repeat(12,minmax(0,1fr));min-height:calc(100svh - var(--bar-h) - 160px)}
+  .nf-t{grid-column:1/span 5}
+  .nf-plate{grid-column:7/-1}
+}

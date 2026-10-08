@@ -1,0 +1,24 @@
+/* ==========================================================================
+   FIELD NOTE · 404: "This page is not in the ledger." A figure pasted in, three ways back.
+   ========================================================================== */
+.nf2 { padding-top: var(--s6); }
+.nf2 .dh { margin-bottom: var(--s6); }
+.nf2__grid { display: grid; gap: var(--s7); }
+.nf2__t { font-size: clamp(40px, 3.6vw + 24px, 84px); max-width: 13ch; }
+.nf2__hi { margin-top: var(--s3); font-size: 17px; font-weight: 500; color: var(--ink-2); line-height: 1.5; }
+.nf2__lead { margin-top: var(--s5); font-size: var(--t-lead); line-height: 1.4; max-width: 38ch; }
+.nf2__go { margin-top: var(--s6); border-top: 1px solid var(--line); max-width: 520px; }
+.nf2__go a { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "en arr" "sub arr"; align-items: center; column-gap: var(--s3); min-height: 60px; padding: 8px 0; border-bottom: 1px solid var(--line-soft);
+  text-decoration: none; transition: background-color var(--d-hover); }
+.nf2__en { grid-area: en; font-weight: 700; font-size: 19px; letter-spacing: -.015em; }
+.nf2__en [lang="hi"] { font-weight: 500; font-size: 14px; color: var(--ink-2); margin-left: .4em; letter-spacing: 0; }
+.nf2__sub { grid-area: sub; font-weight: 400; color: var(--ink-2); }
+.nf2__go .arr { grid-area: arr; font-family: var(--f-mono); transition: transform var(--d-s) var(--ease); }
+.nf2__go a:hover { background: var(--paper-hi); }
+.nf2__go a:hover .arr { transform: translateX(3px); }
+.nf2__fig { max-width: 520px; }
+@media (min-width: 1100px) {
+  .nf2__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); align-items: start; }
+  .nf2__txt { grid-column: 1 / 7; }
+  .nf2__fig { grid-column: 8 / 13; margin-top: var(--s2); }
+}

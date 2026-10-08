@@ -1,0 +1,71 @@
+/* 05 Booking (PHASE-50 §3.9). Phone screen 1: title + Pl. 08 (4:5, the circle beside the lectern).
+   Steps: Bodoni numerals joined by a vertical hairline drawn on entry (M1), numbers first (M2). FAQ: M10.
+   1200+: Pl. 08 in cols 1–4 (sticky), steps in cols 6–12, FAQ as a 2-column list. */
+
+.bk-open{min-height:0;padding-block:var(--s6) var(--s5);border-bottom:0}
+.bk-plate{--dx:84%;--dy:9%;--ds:17%}
+.bk-plate .plate__frame{aspect-ratio:4/5}
+.bk-plate .plate__img img{object-position:50% 35%}
+.bk-steps{padding-top:var(--s8)}
+
+/* 05.01 steps */
+.steps{position:relative;counter-reset:none}
+.step::after{content:"";position:absolute;left:1.375rem;top:calc(var(--s4) + 3.25rem);bottom:calc(-1 * var(--s4));width:1px;background:var(--ink);transform-origin:50% 0}
+.step:last-child::after{display:none}
+.step{position:relative;display:grid;grid-template-columns:2.75rem minmax(0,1fr);column-gap:var(--s4);padding-block:var(--s4) var(--s5);border-top:1px solid var(--rule)}
+.step:first-child{border-top-color:var(--ink)}
+.step__no{position:relative;z-index:1;justify-self:center;align-self:start;font-family:var(--f-display);font-size:2.75rem;line-height:.9;letter-spacing:-.02em;font-variant-numeric:lining-nums}
+.step__t{font-family:var(--f-display);font-weight:400;font-size:var(--t-h2);line-height:1.1;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.step__t [lang="hi"]{font-size:.9375rem;color:var(--ink-2)}
+.step__dl{display:grid;gap:2px;margin-top:var(--s3)}
+.step__dl dt{margin-top:var(--s3);font-size:var(--t-label);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.step__dl dt [lang="hi"]{margin-left:8px;font-size:.75rem;letter-spacing:0;font-weight:400;color:var(--ink-2)}
+.step__dl dt:first-child{margin-top:0}
+.step__dl dd{font-size:var(--t-small);line-height:1.5}
+.step__go{display:flex;font-size:var(--t-small)}
+.bk-note{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--ink);font-size:var(--t-small);color:var(--ink-2)}
+/* M1 vertical hairline + M2 numbers first, then the text */
+.motion .step::after{transform:scaleY(0);transition:transform 420ms var(--e-out) calc(var(--i,0) * 120ms + 200ms)}
+.motion .steps.is-in .step::after{transform:scaleY(1)}
+.motion .steps .step__no{opacity:0;transition:opacity 200ms var(--e-std) calc(var(--i,0) * 120ms)}
+.motion .steps .step__b{opacity:0;transform:translateY(8px);transition:opacity var(--d-row) var(--e-out) calc(var(--i,0) * 120ms + 80ms),transform var(--d-row) var(--e-out) calc(var(--i,0) * 120ms + 80ms)}
+.motion .steps.is-in :is(.step__no,.step__b){opacity:1;transform:none}
+
+/* 05.02 FAQ (M10) */
+.faq{border-bottom:1px solid var(--ink)}
+.faq__q{border-top:1px solid var(--rule)}
+.faq__q:first-child{border-top-color:var(--ink)}
+.faq__q>summary{align-items:baseline;padding-block:14px;gap:var(--s3)}
+.faq__no{flex:none;width:2rem;font-family:var(--f-code);font-size:var(--t-code);color:var(--ink-2)}
+.faq__t{font-family:var(--f-display);font-size:1.3125rem;line-height:1.2}
+.faq__q .disclose__mk{align-self:center}
+.faq__q .disclose__body>div{padding:0 0 var(--s5) calc(2rem + var(--s3));display:grid;gap:var(--s2);font-size:var(--t-small);line-height:1.55}
+.faq__q .disclose__body p{max-width:56ch}
+.faq__go{font-size:var(--t-small)}
+.faq__q .disclose__body{overflow:hidden}
+@media (hover:hover){.faq__q>summary:hover .faq__t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}}
+
+
+@media (min-width:768px){
+  .bk-open{padding-top:var(--s7)}
+  .bk-body{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:var(--gutter);align-items:start}
+  .bk-plate{grid-column:1/span 3;position:sticky;top:calc(var(--bar-h) + 24px)}
+  .bk-steps{grid-column:5/-1;padding-top:0}
+}
+@media (min-width:1200px){
+  .bk-open{padding-top:var(--s8)}
+  .bk-body{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .bk-plate{grid-column:1/span 4}
+  .bk-steps{grid-column:6/-1}
+  .step::after{left:2rem;top:calc(var(--s5) + 4.5rem);bottom:calc(-1 * var(--s5))}
+
+  .bk-faq{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);align-items:start}
+  .bk-faq>.shead{grid-column:1/span 4;position:sticky;top:calc(var(--bar-h) + 24px)}
+  .bk-faq>.faq{grid-column:6/-1}
+  .step{grid-template-columns:4rem minmax(0,1fr) ;column-gap:var(--s6);padding-block:var(--s5) var(--s6)}
+  .step__no{font-size:4rem}
+  .step__b{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);column-gap:var(--gutter)}
+  .step__dl{margin-top:0}
+  .faq__t{font-size:1.5rem}
+}
+@media print{.faq__q .disclose__body{display:grid!important}}

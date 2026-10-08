@@ -1,0 +1,188 @@
+/* C · Exhibition — 01 Profile (PHASE-50 §3.1). Phone (4 col) is the design; 768 and 1200+ adapt it.
+   Tokens and components from css/system.css only; no new colours or fonts. Red is not used on this page. */
+
+/* ---------- Title plate ---------- */
+.pnav{margin:var(--s6) calc(-1 * var(--margin)) 0;overflow-x:auto;scrollbar-width:none;padding-inline:var(--margin)}
+.pnav::-webkit-scrollbar{display:none}
+.pnav ol{display:flex;gap:6px;width:max-content}
+.pnav a{display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:6px 12px;border:1px solid var(--rule);line-height:1.2;transition:border-color var(--d-hover) var(--e-std),transform var(--d-press) var(--e-std)}
+.pnav a:active{transform:scale(.98)}
+@media (hover:hover){.pnav a:hover{border-color:var(--ink)}}
+.pnav__no{font-family:var(--f-code);font-size:var(--t-micro);color:var(--ink-2)}
+.pnav__en{font-size:var(--t-small);font-weight:500;white-space:nowrap}
+
+/* ---------- Page body: phone order 01.01 → 01.06; 1200+ moves 01.05 beside 01.01 ---------- */
+.pf{display:flex;flex-direction:column}
+.pf-top{display:contents}
+.pf-ov{order:1}.pf-chron{order:2}.pf-lang{order:3}.pf-places{order:4}.pf-portrait{order:5}.pf-lectern{order:6}
+
+/* ---------- 01.01 Overview: label above value on phone; 56 px rows ---------- */
+.ov{border-top:1px solid var(--ink)}
+.ov__row{display:grid;gap:2px;padding-block:12px 14px;border-bottom:1px solid var(--rule);min-height:56px}
+.ov__k{font-size:var(--t-label);font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:1.35;color:var(--ink-2)}
+.ov__k [lang="hi"]{margin-left:.5em;font-size:.75rem;letter-spacing:0;font-weight:400;text-transform:none;color:var(--ink-3)}
+.ov__v{font-size:1.0625rem;line-height:1.45}
+.ov__name{font-family:var(--f-display);font-size:1.75rem;line-height:1.1;letter-spacing:-.01em}
+.ov__name-hi{font-family:var(--f-deva-display);font-size:1.25rem}
+.ov__sep{color:var(--ink-3);margin-inline:.15em}
+.ov__chip{margin-left:8px;vertical-align:middle}
+.ov__more{display:flex;flex-wrap:wrap;align-items:center;gap:0 12px;margin-top:2px}
+.ov__num{font-family:var(--f-display);font-size:1.75rem;line-height:1;font-variant-numeric:lining-nums proportional-nums}
+.ov__go{font-family:var(--f-code);font-size:var(--t-code);font-weight:400}
+@media (min-width:768px){
+  .ov__row{grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:var(--gutter);align-items:baseline}
+  .ov__k [lang="hi"]{display:block;margin:2px 0 0}
+}
+
+/* ---------- 01.02 Chronology (略歴): a vertical register, sticky year ---------- */
+.pf-rule{max-width:62ch;font-size:var(--t-small);color:var(--ink-2);margin:calc(-1 * var(--s3)) 0 var(--s5)}
+.pf-rule .arrow{min-height:44px;color:var(--ink);font-size:var(--t-small)}
+.chron__head{display:none}
+.chron__years{border-bottom:1px solid var(--ink)}
+.cy{position:relative;display:grid;grid-template-columns:4.25rem minmax(0,1fr);column-gap:var(--s3);padding-top:2px}
+.cy::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--ink);transform-origin:0 50%}
+.cy__y{position:sticky;top:calc(var(--bar-h) + 6px);align-self:start;padding-top:10px;font-family:var(--f-display);font-weight:400;font-size:1.75rem;line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.cy__lines{min-width:0}
+.cl{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"m c" "w w" "l l";column-gap:var(--s3);padding-block:10px 12px;border-top:1px solid var(--rule-2)}
+.cy__lines>.cl:first-child{border-top:0}
+.cl__m{grid-area:m;align-self:center;font-family:var(--f-code);font-size:var(--t-code);color:var(--ink-2)}
+.cl__w{grid-area:w;margin-top:4px;font-size:.9375rem;line-height:1.4}
+.cl__c{grid-area:c;justify-self:end}
+.cl__c--none{display:none}
+.cl__l{grid-area:l;margin-top:6px;font-size:var(--t-label);line-height:1.45;color:var(--ink-2)}
+.cl__mk{white-space:nowrap}
+.cl--gap{min-height:56px;grid-template-areas:"m c" "w w"}
+.cl__w--gap{color:var(--ink-3);font-style:italic;font-family:var(--f-display);font-size:1rem}
+.cy__pl{padding:2px 0 16px}
+.cy__pl .plate+.plate{margin-top:var(--s5)}
+.cl__pl--inset{max-width:78%}
+
+/* ---------- 01.03 Languages ---------- */
+.lang{border-top:1px solid var(--ink)}
+.lang__row{padding-block:var(--s4) var(--s5);border-bottom:1px solid var(--rule)}
+.lang__n{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px}
+.lang__en{font-family:var(--f-display);font-size:clamp(2.5rem,11vw,3.5rem);line-height:1;letter-spacing:-.015em}
+.lang__hi{font-family:var(--f-deva-display);font-size:1.25rem;color:var(--ink-2)}
+.lang__b{margin-top:var(--s3);font-size:var(--t-small);color:var(--ink-2);max-width:48ch}
+.lang__b .code{color:var(--ink);font-size:var(--t-code);padding-bottom:1px}
+.lang__bk{font-size:var(--t-label);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-right:6px}
+.lang__bk [lang="hi"]{font-size:.75rem;letter-spacing:0;font-weight:400;color:var(--ink-2);text-transform:none;margin-left:4px}
+
+/* ---------- 01.04 Places outside India ---------- */
+.pl-figs{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--gutter);margin-bottom:var(--s5)}
+.pl-fig{display:flex;flex-direction:column;gap:6px;padding-top:var(--s3);border-top:1px solid var(--rule)}
+.pl-fig__v{font-family:var(--f-display);font-size:clamp(3.25rem,15vw,4.5rem);line-height:.9;letter-spacing:-.02em;font-variant-numeric:lining-nums proportional-nums}
+.pl-fig__l{font-size:var(--t-small);font-weight:500}
+.pl-fig__l [lang="hi"]{margin-left:6px;font-weight:400;font-size:.8125rem;color:var(--ink-2)}
+.plc__head{display:none}
+.plc{border-top:1px solid var(--ink)}
+.plc__row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"p y" "c c" "e e";column-gap:var(--s3);padding-block:12px 14px;border-bottom:1px solid var(--rule)}
+.plc__p{grid-area:p;font-size:1.0625rem;font-weight:500;line-height:1.3}
+.plc__leg{display:block;font-size:var(--t-label);font-weight:400;color:var(--ink-2)}
+.plc__leg [lang="hi"]{margin-left:4px;font-size:.75rem}
+.plc__y{grid-area:y;font-family:var(--f-code);font-size:var(--t-code);color:var(--ink-2);text-align:right;white-space:nowrap}
+.plc__c{grid-area:c;margin-top:2px;font-size:var(--t-small);color:var(--ink-2)}
+.plc__e{grid-area:e;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.plc__e .chip{padding-inline:9px}
+.pl-basis{margin-top:var(--s4);font-size:var(--t-small);color:var(--ink-2);max-width:60ch}
+.pf-cta{margin-top:var(--s5)}
+.pl-side{margin-top:var(--s7)}
+
+/* ---------- 01.05 Portrait: 4:5 on her profile on phone, 2.35:1 at 768+ ---------- */
+.pf-fig{margin:0}
+.portrait__plate .plate__frame{aspect-ratio:4/5}
+.portrait__plate .plate__img img{object-position:var(--op-phone,50% 50%)}
+
+/* ---------- 01.06 At the lectern: a typological series, same size and curve ---------- */
+.lec__track{grid-auto-columns:calc(100vw - 2 * var(--margin) - 56px - var(--gutter))}
+.lec__plate .plate__frame{aspect-ratio:4/5}
+.lec__plate .plate__img img{transition:filter 300ms var(--e-std),opacity 400ms var(--e-std)}
+@media (hover:hover){.lec__fig:hover .lec__plate .plate__img img{filter:grayscale(1) contrast(1.08) brightness(1)}}
+.lec__fig:active .lec__plate .plate__img img{filter:grayscale(1) contrast(1.08) brightness(1)}
+.lec__fig .plate__cap{min-height:3em}
+
+/* ---------- M2 rows for this page (number/label first, value rises 8 px) ---------- */
+.motion .ov[data-rows] .r .ov__k,.motion .lang[data-rows] .r .lang__en,.motion .plc[data-rows] .r .plc__p,.motion .cy__lines[data-rows] .r .cl__m{opacity:0;transition:opacity 200ms var(--e-std) calc(var(--i,0) * 40ms)}
+.motion .ov[data-rows] .r .ov__v,.motion .lang[data-rows] .r .lang__b,.motion .plc[data-rows] .r :is(.plc__c,.plc__e,.plc__y),.motion .cy__lines[data-rows] .r :is(.cl__w,.cl__c){opacity:0;transform:translateY(8px);transition:opacity var(--d-row) var(--e-out) calc(var(--i,0) * 40ms + 80ms),transform var(--d-row) var(--e-out) calc(var(--i,0) * 40ms + 80ms)}
+.motion .cy__lines[data-rows] .r .cl__l,.motion .lang[data-rows] .r .lang__hi{opacity:0;transition:opacity var(--d-row) var(--e-std) calc(var(--i,0) * 40ms + 160ms)}
+.motion [data-rows].is-in .r :is(.ov__k,.ov__v,.lang__en,.lang__b,.lang__hi,.plc__p,.plc__c,.plc__e,.plc__y,.cl__m,.cl__w,.cl__c,.cl__l){opacity:1;transform:none}
+/* year numerals fade in after the year rule draws (M1) */
+.motion .cy .cy__y span{opacity:0;transition:opacity 500ms var(--e-std) 200ms}
+.motion .cy.is-in .cy__y span{opacity:1}
+.motion .pl-fig{opacity:0;transform:translateY(8px);transition:opacity 500ms var(--e-std),transform 500ms var(--e-out)}
+.motion .pf-places .shead.is-in~.pl-wrap .pl-fig{opacity:1;transform:none}
+
+/* ---------- 768 ---------- */
+@media (min-width:768px){
+  .pnav ol{flex-wrap:wrap;width:auto}
+  .pnav{margin-inline:0;padding-inline:0;overflow:visible}
+  .cy{grid-template-columns:6rem minmax(0,1fr)}
+  .cy__y{font-size:2.25rem}
+  .cl{grid-template-columns:4.5rem minmax(0,1fr) 7rem;grid-template-areas:"m w c" ". l c"}
+  .cl__m{align-self:baseline;margin-top:6px}
+  .cl__w{margin-top:4px}
+  .cl__c{align-self:start}
+  .cl--gap{grid-template-areas:"m w c"}
+  .cy__pl{padding-left:calc(4.5rem + var(--s3))}
+  .cy__pl .plate{max-width:440px}
+  .plc__row{grid-template-columns:12rem minmax(0,1fr) 7rem;grid-template-areas:"p c y" "p e e"}
+  .portrait__plate .plate__frame{aspect-ratio:var(--ar)}
+  .portrait__plate .plate__img img{object-position:50% 50%}
+  .lec__track{grid-auto-columns:calc((100vw - 2 * var(--margin) - 24px - 2 * var(--gutter)) / 2)}
+  .pl-figs{max-width:520px}
+}
+
+/* ---------- 1200+: overview cols 1–7 beside the portrait (8–12); chronology as a 5-column table with margin plates ---------- */
+@media (min-width:1200px){
+  .pf{display:block}
+  .pf-top{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);align-items:start}
+  .pf-ov{grid-column:1/span 7}
+  .pf-portrait{grid-column:8/-1;position:sticky;top:calc(var(--bar-h) + 24px);padding-left:var(--s5)}
+  .portrait .plate__cap{max-width:46ch}
+
+  /* chronology table: Year · Month · What · Code · Listed as | plates in the margin (cols 10–12) */
+  .chron__head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);padding-bottom:10px;font-size:var(--t-label);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+  .chron__head [lang="hi"]{display:block;font-size:.6875rem;letter-spacing:0;font-weight:400;text-transform:none;color:var(--ink-3);margin-top:2px}
+  .ch__y{grid-column:1}
+  .ch__l{grid-column:2/span 8;display:grid;grid-template-columns:4.5rem minmax(0,1fr) 7rem 15rem;column-gap:var(--s4)}
+  .ch__p{grid-column:10/-1}
+  .cy{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);grid-template-rows:repeat(var(--n),auto) 1fr}
+  .cy__y{grid-column:1;grid-row:1/-1;font-size:2.75rem;padding-top:12px}
+  .cy__lines{grid-column:2/-1;grid-row:1/-1;display:grid;grid-template-columns:subgrid;grid-template-rows:subgrid}
+  .cy__lines>.cl{grid-column:1/span 8;border-top:1px solid var(--rule-2)}
+  .cy__lines>.cl:first-child{border-top:0}
+  .cl{grid-template-columns:4.5rem minmax(0,1fr) 7rem 15rem;grid-template-areas:"m w c l";column-gap:var(--s4);align-items:baseline;padding-block:12px}
+  .cl--gap{grid-template-areas:"m w c l"}
+  .cl__w,.cl__l{margin-top:0}
+  .cl__c{justify-self:start;align-self:center}
+  .cl__c--none{display:inline-flex;align-items:center;min-height:44px;color:var(--ink-3);font-family:var(--f-code)}
+  /* margin plates no longer set the row height (review fixes): one small plate per year, hung from its line */
+  .cy__pl{grid-column:9/-1;grid-row:var(--r)/span 1;align-self:start;height:0;overflow:visible;padding:12px 0 0;position:relative;z-index:1}
+  .cy__pl .plate{max-width:220px;background:var(--paper)}
+  .cl__pl--inset{max-width:100%}
+  .cl:hover{background:var(--row-hover)}
+
+  .lang{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--gutter)}
+  .lang__row:nth-child(2){border-top:0}
+
+  .pl-wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);align-items:start}
+  .pl-main{grid-column:1/span 8}
+  .pl-side{grid-column:9/-1;margin-top:0;position:sticky;top:calc(var(--bar-h) + 24px);padding-left:var(--s5)}
+  .plc__head{display:grid;grid-template-columns:12rem minmax(0,1fr) 7rem minmax(0,1.3fr);column-gap:var(--s4);padding-bottom:10px;font-size:var(--t-label);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+  .plc__head [lang="hi"]{display:block;font-size:.6875rem;letter-spacing:0;font-weight:400;text-transform:none;color:var(--ink-3);margin-top:2px}
+  .plc__row{grid-template-columns:12rem minmax(0,1fr) 7rem minmax(0,1.3fr);grid-template-areas:"p c y e";column-gap:var(--s4);align-items:baseline}
+  .plc__c,.plc__e{margin-top:0}
+  .plc__y{text-align:left}
+  .plc__e{align-self:center}
+  .pl-figs{max-width:none;grid-template-columns:repeat(4,minmax(0,1fr))}
+
+  .lec .swipe__track{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;margin:0;padding:0}
+  .lec .swipe__ctl{display:none}
+}
+
+/* ---------- print ---------- */
+@media print{
+  .pnav,.pf-cta{display:none!important}
+  .cy__y{position:static}
+  .pf-portrait,.pl-side{position:static}
+}

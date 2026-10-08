@@ -1,0 +1,123 @@
+/* ==========================================================================
+   FIELD NOTE · Method (PHASE-51 §9.8)
+   Units 01–09: a capsule number, the claim, its basis in mono, figures as a contact strip.
+   1440: claim at columns 1–5, figures at 6–12.
+   ========================================================================== */
+
+/* ---------- Unit ---------- */
+.mu .dh { margin-bottom: var(--s5); }
+.mu__grid { display: grid; gap: var(--s6); }
+.mu__txt { min-width: 0; }
+.mu__figs { min-width: 0; }
+.mu__h { display: flex; align-items: baseline; gap: 12px; margin-top: 0; }
+.mu__cap { flex: none; position: relative; top: -.32em; min-height: 26px; min-width: 44px; justify-content: center; padding: 0 12px; font-size: 12px; font-weight: 500; letter-spacing: 0; }
+.mu__t [lang="hi"] { display: block; margin-top: .35em; }
+.mu__claim { margin-top: var(--s4); font-size: var(--t-lead); line-height: 1.4; max-width: 46ch; letter-spacing: -.005em; }
+@media (min-width: 1100px) {
+  .mu__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); align-items: start; }
+  .mu__txt { grid-column: 1 / 6; position: sticky; top: calc(var(--bar-h) + var(--s5)); }
+  .mu__figs { grid-column: 6 / 13; }
+  .mu__grid--solo .mu__txt { grid-column: 1 / 9; position: static; }
+}
+
+/* the multi-day lines, set as ledger rows (year·number in full) */
+.mu__lines { margin-top: var(--s5); }
+.mu__lines .ln { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "no mo pl" "nm nm nm"; }
+@media (min-width: 700px) and (max-width: 1099px) { .mu__lines .ln { grid-template-columns: 76px 128px minmax(0, 1fr) 132px; grid-template-areas: "no mo nm pl"; } }
+
+/* the field-note link under unit 04 */
+.mu__note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "c a" "t a"; align-items: center; gap: 8px var(--s3); margin-top: var(--s5); padding: 12px 14px 14px; text-decoration: none;
+  box-shadow: inset 0 0 0 1px var(--ink); transition: background-color var(--d-hover); max-width: 520px; }
+.mu__note .cap { grid-area: c; justify-self: start; }
+.mu__note-t { grid-area: t; font-weight: 600; font-size: 15px; line-height: 1.35; }
+.mu__note-t .code { display: block; font-weight: 400; color: var(--ink-2); margin-bottom: 2px; }
+.mu__note .arr { grid-area: a; font-family: var(--f-mono); transition: transform var(--d-s) var(--ease); }
+.mu__note:hover { background: var(--paper-hi); }
+.mu__note:hover .arr { transform: translateX(3px); }
+
+/* ---------- 07 Formats: a register with an 11-volume strip per format ---------- */
+.fms { margin-top: var(--s5); border-top: 1px solid var(--line); }
+.fms__list { display: grid; }
+.fm { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "nm n" "s s"; column-gap: var(--s3); row-gap: 8px; align-items: baseline; padding: 12px 0 10px; border-bottom: 1px solid var(--line-soft); }
+.fm__nm { grid-area: nm; min-width: 0; font-weight: 650; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; }
+.fm__nm [lang="hi"] { display: block; font-weight: 500; font-size: 13px; color: var(--ink-2); letter-spacing: 0; margin-top: 1px; }
+.fm__n { grid-area: n; display: grid; justify-items: end; text-align: right; font: 400 12px/1.3 var(--f-mono); color: var(--ink-2); white-space: nowrap; }
+.fm__n b { font: 700 24px/1 var(--f-sans); letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; margin-bottom: 3px; }
+.fm__lo { font-size: 11px; }
+.fm__s { grid-area: s; display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); }
+.fm__c { display: block; height: 44px; padding: 11px 1px; /* 44 px tall tap cell, 22 px drawing */ border-left: 1px solid var(--line-soft); text-decoration: none; }
+.fm__c:first-child { border-left: 0; }
+.fm__c svg { width: 100%; height: 100%; overflow: visible; }
+.fm__c .bl { stroke: var(--ink-2); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.fm__c--0 .bl { stroke: var(--line-soft); }
+.fm__c .tk { stroke: var(--ink); stroke-width: 3; vector-effect: non-scaling-stroke; }
+a.fm__c:hover { background: var(--paper-hi); }
+a.fm__c:hover .tk { stroke-width: 5; }
+.fm--head { padding: 8px 0 6px; border-bottom: 1px solid var(--line); }
+.fm--head .fm__nm, .fm--head .fm__n { color: var(--ink-2); font-size: 11px; font-family: var(--f-mono); font-weight: 400; }
+.fm--head .fm__n { display: none; }
+.fm--head .fm__s { display: block; }
+.fm__scale { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); font: 500 10px/1 var(--f-mono); color: var(--ink-2); }
+.fm__scale span { padding-left: 3px; border-left: 1px solid var(--line-soft); }
+.fm__scale span:first-child { border-left: 0; padding-left: 0; }
+/* phones: the strip is a picture of the years (cells under 44 px are not targets; the ruler is) */
+@media (max-width: 699px) { .fm__c { pointer-events: none; } }
+@media (min-width: 700px) {
+  .fm { grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1.25fr); grid-template-areas: "nm n s"; align-items: center; min-height: 64px; padding: 8px 0; }
+  .fm__n { justify-items: start; text-align: left; }
+  .fm__c { height: 44px; padding: 10px 1px; }
+  .fm--head .fm__n { display: block; }
+}
+@media (min-width: 1100px) {
+  .fms { max-width: none; }
+  .fm { grid-template-columns: 4fr 2fr 6fr; column-gap: var(--gut); }
+  .fm__nm { font-size: 18px; }
+  .fm__nm [lang="hi"] { display: inline; margin-left: .55em; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .fms.rv .fm__c .tk { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(0); }
+  .js .fms.rv.is-in .fm__c .tk { transform: none; transition: transform var(--d-m) var(--ease); transition-delay: calc(var(--i, 0) * 9ms + 120ms); }
+}
+
+/* ---------- 08 How a request works: three ledger lines, each ticked as it draws (A13) ---------- */
+.mst { display: grid; margin-top: var(--s5); border-top: 1px solid var(--line); }
+.mst__i { display: grid; grid-template-columns: 34px 20px minmax(0, 1fr); grid-template-areas: "no tk h" ". . t"; column-gap: 8px; row-gap: 4px; align-items: baseline; padding: 14px 0 16px; border-bottom: 1px solid var(--line-soft); }
+.mst__no { grid-area: no; }
+.st__tk { grid-area: tk; width: 16px; height: 12px; align-self: center; overflow: visible; }
+.st__tk path { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: square; stroke-dasharray: 20; stroke-dashoffset: 0; }
+.mst__h { grid-area: h; font-weight: 700; font-size: 20px; letter-spacing: -.015em; }
+.mst__h [lang="hi"] { font-weight: 500; font-size: 14px; color: var(--ink-2); margin-left: .35em; letter-spacing: 0; }
+.mst__t { grid-area: t; color: var(--ink-2); max-width: 44ch; }
+.mst__note { margin-top: var(--s5); max-width: 60ch; }
+.mst__go { margin-top: var(--s5); }
+@media (min-width: 1100px) {
+  .mst { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gut); border-top: 0; }
+  .mst__i { border-top: 2px solid var(--ink); border-bottom: 0; padding-top: 16px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .mst.rv .st__tk path { stroke-dashoffset: 20; }
+  .js .mst.rv.is-in .st__tk path { stroke-dashoffset: 0; transition: stroke-dashoffset var(--d-s) var(--ease); transition-delay: calc(var(--k) * 260ms + 300ms); }
+}
+
+/* ---------- 09 FAQ: <details>, opening by height (240 ms) where the browser can ---------- */
+.mfaq { margin-top: var(--s5); border-top: 1px solid var(--line); interpolate-size: allow-keywords; }
+.mfaq__d { border-bottom: 1px solid var(--line-soft); }
+.mfaq__d summary { display: grid; grid-template-columns: 34px minmax(0, 1fr) 22px; align-items: center; column-gap: 8px; min-height: 60px; padding: 10px 0; cursor: pointer; list-style: none; transition: background-color var(--d-hover); }
+.mfaq__d summary::-webkit-details-marker { display: none; }
+.mfaq__d summary:hover { background: var(--paper-hi); }
+.mfaq__k { color: var(--ink-2); font-weight: 400; }
+.mfaq__q { font-weight: 650; font-size: 17px; line-height: 1.3; letter-spacing: -.01em; }
+/* plus turning to a cross: two strokes */
+.mfaq__x { position: relative; width: 14px; height: 14px; justify-self: end; }
+.mfaq__x::before, .mfaq__x::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; margin-top: -.75px; background: var(--ink); transition: transform var(--d-m) var(--ease); }
+.mfaq__x::after { transform: rotate(90deg); }
+.mfaq__d[open] .mfaq__x::before { transform: rotate(45deg); }
+.mfaq__d[open] .mfaq__x::after { transform: rotate(135deg); }
+.mfaq__a { padding: 0 0 var(--s4) 42px; display: grid; gap: 4px; }
+.mfaq__a p { max-width: 62ch; }
+.mfaq__d::details-content { block-size: 0; overflow: clip; transition: block-size var(--d-m) var(--ease), content-visibility var(--d-m) allow-discrete; }
+.mfaq__d[open]::details-content { block-size: auto; }
+@media (min-width: 1100px) { .mfaq { max-width: calc((100% - 11 * var(--gut)) / 12 * 8 + 7 * var(--gut)); } }
+@media (prefers-reduced-motion: reduce) { .mfaq__d::details-content { transition: none; } }
+/* a unit whose text runs long (06, with its lines) is not pinned */
+@media (min-width: 1100px) { .mu__grid:has(.mu__lines) .mu__txt { position: static; } }

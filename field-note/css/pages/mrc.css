@@ -1,0 +1,78 @@
+/* ==========================================================================
+   FIELD NOTE · shared by Method, Request, Colophon and 404:
+   the page head with an "On this page" list (目次), the figure contact strip, playable figures
+   (silent loops and clips with her voice), and the basis line under a claim.
+   ========================================================================== */
+
+/* ---------- Page head with an aside ---------- */
+.ph__grid { display: grid; gap: var(--s6); }
+.ph__aside { min-width: 0; }
+@media (min-width: 1100px) {
+  .ph__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut); align-items: end; }
+  .ph__main { grid-column: 1 / 8; }
+  .ph__aside { grid-column: 9 / 13; }
+}
+
+/* "On this page": numbered, two columns on phones, every row a 48 px target */
+.mtoc__h { color: var(--ink-2); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.mtoc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gut); }
+.mtoc li { min-width: 0; border-bottom: 1px solid var(--line-soft); }
+.mtoc a { display: flex; align-items: center; gap: 10px; min-height: 48px; text-decoration: none; font-weight: 600; font-size: 14.5px; line-height: 1.2; letter-spacing: -.005em; transition: background-color var(--d-hover); }
+.mtoc a .code { font-weight: 400; color: var(--ink-2); flex: none; width: 1.6em; }
+.mtoc a:hover { background: var(--paper-hi); }
+.mtoc a:hover span + * { text-decoration: underline; }
+@media (min-width: 700px) { .mtoc ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .mtoc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mtoc a { min-height: 40px; font-size: 14px; } }
+
+/* ---------- Basis: the evidence under a claim, in mono. Phones: one item per row, links 44 px. ---------- */
+.basis { margin-top: var(--s4); padding-top: 10px; border-top: 1px solid var(--line-soft); font: 400 12.5px/1.55 var(--f-mono); color: var(--ink-2); max-width: 60ch; }
+.basis .lab { color: var(--ink); margin-bottom: 4px; }
+.basis__v li { display: block; }
+.basis a { color: var(--ink); display: inline-flex; align-items: center; min-height: 44px; }
+@media (min-width: 700px) {
+  .basis__v li { display: inline; }
+  .basis__v li + li::before { content: "; "; }
+  .basis a { display: inline; min-height: 0; white-space: nowrap; }
+}
+
+/* ---------- Figure contact strip: swipe row on phones and 768, a row of prints at 1440 ---------- */
+.fst { --fh: 280px; position: relative; }
+.fst__track { display: flex; align-items: flex-start; gap: var(--gut); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+  margin-inline: calc(var(--mar) * -1); padding: 2px var(--mar) var(--s3); scroll-padding-inline: var(--mar); }
+.fst__track::-webkit-scrollbar { display: none; }
+.fst__track:focus-visible { outline-offset: -2px; box-shadow: none; }
+.fst .pf { flex: none; scroll-snap-align: start; width: max(140px, min(calc(var(--fh) * var(--ar, 1)), calc(100vw - 2 * var(--mar) - 24px - var(--gut)))); }
+.fst__n { margin-top: 2px; font: 400 12px var(--f-mono); color: var(--ink-2); }
+@media (min-width: 700px) { .fst { --fh: 320px; } .fst .pf { width: max(200px, min(calc(var(--fh) * var(--ar, 1)), 62vw)); } }
+/* 1440: prints laid on a 14-column subgrid by shape (wide 8, landscape 7, square 5, portrait 4), packed densely */
+@media (min-width: 1100px) {
+  .fst__track { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); grid-auto-flow: row dense; align-items: start; gap: var(--s6) var(--gut); overflow: visible; margin: 0; padding: 2px 0 0; scroll-snap-type: none; }
+  .fst .pf { width: auto; grid-column: span var(--span, 7); }
+}
+@media (prefers-reduced-motion: no-preference) { .fst__track { scroll-behavior: smooth; } }
+
+/* ---------- Playable figures (A8, A15) ---------- */
+.pfv { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity var(--d-sheet) var(--ease); pointer-events: none; }
+.pfv video { width: 100%; height: 100%; object-fit: cover; }
+.pf.is-live .pfv { opacity: 1; }
+/* a clip is grey until it plays, then turns to colour (300 ms): the recording is live */
+.pf--clip .pfv video { filter: grayscale(1); transition: filter var(--d-sheet) var(--ease); }
+.pf--clip.is-playing .pfv video { filter: none; }
+.pf__ctl { position: absolute; right: 0; bottom: 0; z-index: 3; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 0 12px; border: 0;
+  background: var(--ink); color: var(--paper-hi); font: 500 12px/1 var(--f-mono); transition: background-color var(--d-hover), transform var(--d-press) var(--ease); }
+.pf__ctl:hover { background: #000; }
+.pf__ctl:active { transform: scale(.98); }
+.js .pf__ctl { display: inline-flex; }
+html:not(.js) .pf__ctl { display: none; }
+.pf__dur { color: #B9B9B3; }
+/* play: a triangle; pause: two bars. No circles. */
+.pf__ico { position: relative; width: 10px; height: 12px; flex: none; }
+.pf__ico::before { content: ""; position: absolute; inset: 0; background: currentColor; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+[aria-pressed="true"] .pf__ico::before { clip-path: polygon(0 0, 35% 0, 35% 100%, 0 100%, 0 0, 65% 0, 100% 0, 100% 100%, 65% 100%, 65% 0); }
+/* tick progress ruler: one tick per second, inked as the clip plays */
+.pf__prog { --p: -1; display: flex; justify-content: space-between; align-items: flex-end; height: 12px; margin-top: 6px; padding: 0 1px; border-bottom: 1px solid var(--line-soft); }
+.pf__prog i { width: 1px; height: 5px; background: var(--ink); opacity: clamp(.22, calc((var(--p) - var(--t)) * 100 + 1), 1); transition: opacity var(--d-press) linear; }
+.pf__prog i.m { height: 9px; }
+
+
+
